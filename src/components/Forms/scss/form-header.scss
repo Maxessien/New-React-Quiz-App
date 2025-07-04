@@ -1,0 +1,8 @@
+@use 'functions_mixins' as *;
+
+.form-header{
+    font-size: rem(35);
+    color: rgb(0, 44, 61);
+    text-shadow: 0.3px 0.2px 1px black;
+    text-align: center;
+}
