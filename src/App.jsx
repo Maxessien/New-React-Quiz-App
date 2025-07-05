@@ -13,8 +13,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/register" element={<Navigate to={'/quiz'} />} />
-          <Route path="/login" element={<Navigate to={'/quiz'} />} />
+          <Route path="/register" element={<Navigate to={'/quiz/success'} />} />
+          <Route path="/login" element={<Navigate to={'/quiz/csc-102-lecture-1'} />} />
           <Route path="/quiz/success" element={<SuccessPage />}></Route>
           <Route path="/quiz/csc-102-lecture-1" element={<Csc102Lecture1 />}></Route>
         </Routes>

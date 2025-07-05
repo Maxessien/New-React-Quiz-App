@@ -1,10 +1,5 @@
 @use "functions_mixins" as *;
 
-.hero-bg {
-  .hero-bg-text {
-  }
-}
-
 .hero-section {
   @include flex(center, space-between, rem(20));
   position: relative;
