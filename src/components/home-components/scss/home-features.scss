@@ -7,7 +7,7 @@
   min-height: max-content;
   background: rgb(203, 172, 252);
   @include media(medium) {
-    flex-direction: column;
+    flex-direction: column-reverse;
     height: max-content;
   }
   .features-content {
@@ -59,6 +59,7 @@
     }
     img {
       max-height: 100%;
+      opacity: 0;
     }
   }
 }

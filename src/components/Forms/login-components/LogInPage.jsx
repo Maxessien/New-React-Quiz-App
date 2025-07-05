@@ -4,11 +4,12 @@ import LoginHeader from "./LoginHeader";
 import LoginFooter from "./LogInFooter";
 import LoginForm from "./LogInForm";
 import HomePageHeader from "../../home-components/HomeHeader";
+// import BgDesign from "../../home-components/BgDesign";
 
 function Login() {
   useEffect(() => {
     document.body.style.background =
-      "linear-gradient(to bottom, rgb(5, 56, 71), rgb(63, 114, 129))";
+      "linear-gradient(to bottom, rgb(0, 21, 27), rgb(38, 66, 75))";
     return () => (document.body.style.background = "");
   }, []);
 

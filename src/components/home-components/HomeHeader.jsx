@@ -11,7 +11,7 @@ function HomePageHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   function handleHamburgerMenu() {
-    if (window.innerWidth < 481) {
+    if (window.innerWidth < 768) {
       setMobileView(true);
       setMenuOpen(false);
     } else {
@@ -64,6 +64,9 @@ function HomePageHeader() {
                 <ul className="home-nav-list">
                   <li>
                     <Link to="/">Home</Link>
+                  </li>
+                  <li>
+                    <Link to="/quiz">Practice Quiz</Link>
                   </li>
                   <li>
                     <Link to="/register">Sign Up</Link>

@@ -5,24 +5,24 @@ import QuizIntro from "./QuizIntro";
 import Results from "../results/ResultPage";
 import { toast, ToastContainer } from "react-toastify";
 
-function QuizPage() {
+function QuizPage({ quizName, questionsUrl, answersUrl }) {
   useEffect(() => {
-  console.log('effect');
-  document.body.style.background = 'url("/PE.webp")';
-  document.body.style.backgroundPosition = 'center';
-  document.body.style.backgroundRepeat = 'no-repeat';
-  document.body.style.backgroundSize = 'cover';
-  document.body.style.backgroundAttachment = 'fixed';
+    console.log("effect");
+    document.body.style.background = 'url("/PE.webp")';
+    document.body.style.backgroundPosition = "center";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundAttachment = "fixed";
 
-  return () => {
-    // reset styles if needed
-    document.body.style.background = '';
-    document.body.style.backgroundPosition = '';
-    document.body.style.backgroundRepeat = '';
-    document.body.style.backgroundSize = '';
-    document.body.style.backgroundAttachment = '';
-  };
-}, []);
+    return () => {
+      // reset styles if needed
+      document.body.style.background = "";
+      document.body.style.backgroundPosition = "";
+      document.body.style.backgroundRepeat = "";
+      document.body.style.backgroundSize = "";
+      document.body.style.backgroundAttachment = "";
+    };
+  }, []);
 
   const [questions, setQuestions] = useState([]);
   const [submitted, setSubmitted] = useState(false);
@@ -32,10 +32,8 @@ function QuizPage() {
 
   async function fetchQuestions() {
     try {
-      // const fetched = await fetch(
-      // //   "https://raw.githubusercontent.com/Maxessien/Test-API-Fetch-/main/test.json"
-      // // );
-      const fetched = await fetch("/questions.json");
+      const fetched = await fetch(questionsUrl);
+      // const fetched = await fetch("/questions.json");
       const data = await fetched.json();
       setQuestions(data);
       for (let i = 0; i < data.length; i++) {
@@ -50,9 +48,7 @@ function QuizPage() {
 
   async function submitQuiz() {
     try {
-      const fetchedAns = await fetch(
-        "https://raw.githubusercontent.com/Maxessien/Test-API-Fetch-/main/answer.json"
-      );
+      const fetchedAns = await fetch(answersUrl);
       // const fetchedAns = await fetch("/answers.json");
       const answersData = await fetchedAns.json();
       setCorrectAnswers(answersData);
@@ -71,7 +67,10 @@ function QuizPage() {
       ) : (
         <>
           {!questions || questions.length === 0 ? (
-            <QuizIntro fetchFunc={fetchQuestions} />
+            <QuizIntro
+              fetchFunc={fetchQuestions}
+              name={quizName}
+            />
           ) : (
             <div>
               <QuizHeader
@@ -102,4 +101,3 @@ function QuizPage() {
 }
 
 export default QuizPage;
-

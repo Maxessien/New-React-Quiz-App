@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./scss/quiz-intro.scss";
 import { motion } from "framer-motion";
 
-function QuizIntro({ fetchFunc }) {
+function QuizIntro({ fetchFunc, name }) {
   const [loadingState, setLoadingState] = useState("Start Quiz");
   motion;
   const handleClick = () => {
@@ -26,11 +26,7 @@ function QuizIntro({ fetchFunc }) {
         }}
         className="intro-content"
       >
-        <h1>CSC 112 LECTURE 1 QUIZ</h1>
-        <div className="overview">
-          <p>Time: 20 minutes</p>
-          <p>Questions: 15</p>
-        </div>
+        <h1>{name}</h1>
 
         <form className="registry">
           <label htmlFor="userName">Enter Username(Optional)</label>

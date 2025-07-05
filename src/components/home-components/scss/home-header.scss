@@ -22,18 +22,18 @@
         z-index: 999;
     }
     .home-nav{
-        @include media(small){
+        @include media(medium){
             position: fixed;
             height: 100vh;
             width: 100vw;
             top: 0;
             left: 0;
-            background: rgba(0, 0, 0, 0.733);
+            background: rgba(0, 0, 0, 0.89);
             z-index: 99;
         }
         &-list{
             @include flex(center, center, rem(15));
-            @include media(small){
+            @include media(medium){
                 flex-direction: column;
                 padding-top: rem(100);
             }
@@ -43,7 +43,7 @@
                     font-size: rem(18);
                     font-weight: 500;
                     transition: all 200ms linear;
-                    @include media(small){
+                    @include media(medium){
                         color: rgb(230, 230, 230);
                     font-size: rem(20);
             }

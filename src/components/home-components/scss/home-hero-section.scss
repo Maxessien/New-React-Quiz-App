@@ -1,25 +1,7 @@
 @use "functions_mixins" as *;
 
 .hero-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100%;
-  z-index: -999;
-  background: rgb(0, 0, 0);
-  color: rgb(224, 224, 224);
-  overflow: hidden;
   .hero-bg-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: rem(100);
-    font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    filter: blur(0.8px);
-    opacity: 0.13;
   }
 }
 
@@ -99,7 +81,8 @@
       filter: blur(50px);
       @include media(medium){
       width: 25%;
-      height: 35%;
+      height: 45%;
+      filter: blur(30px);
     }
     }
     img {

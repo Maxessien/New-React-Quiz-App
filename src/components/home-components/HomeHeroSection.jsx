@@ -1,16 +1,16 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import "./scss/home-hero-section.scss";
+import BgDesign from "./BgDesign";
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
 
 function HomeHeroSection() {
   const [imageLoaded, setImageLoaded] = useState(false);
   return (
     <>
       <section className="hero-section">
-        <div className="hero-bg">
-          <div className="hero-bg-text">MAX QUIZ</div>
-        </div>
+        <BgDesign />
         <div className="hero-content">
           <h1>LASU CSC Quiz Hub</h1>
           <p>
@@ -36,7 +36,7 @@ function HomeHeroSection() {
             ></motion.div>
           )}
           <img
-            onLoad={()=>setImageLoaded(true)}
+            onLoad={() => setImageLoaded(true)}
             src="Light bulb trim.png"
             alt="Glowing light bulb illustration"
           />

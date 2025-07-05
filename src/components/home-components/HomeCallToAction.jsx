@@ -9,7 +9,7 @@ function HomeCTA() {
       <section className="cta-section">
         <motion.section
           whileInView={{
-            x: ["-50%", 0],
+            x: ["-20%", 0],
             opacity: [0, 1],
           }}
             transition={{
@@ -24,7 +24,7 @@ function HomeCTA() {
         </motion.section>
         <motion.section
           whileInView={{
-            x: ["50%", 0],
+            x: ["20%", 0],
             opacity: [0, 1],
           }}
             transition={{

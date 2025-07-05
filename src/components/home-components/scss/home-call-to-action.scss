@@ -6,7 +6,7 @@
   background: rgb(15, 15, 15);
   color: rgb(212, 212, 212);
   padding: rem(25);
-      @include media(small){
+      @include media(medium){
         flex-direction: column;
         gap: rem(15);
         justify-content: center;
@@ -14,7 +14,8 @@
   section {
     @include flex(center, center, rem(20), column);
     width: 50%;
-      @include media(small){
+    opacity: 0;
+      @include media(medium){
         width: 100%;
       }
     h2 {
