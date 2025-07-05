@@ -66,7 +66,7 @@ function HomePageHeader() {
                     <Link to="/">Home</Link>
                   </li>
                   <li>
-                    <Link to="/quiz">Practice Quiz</Link>
+                    <Link to="/quiz/success">Practice Quiz</Link>
                   </li>
                   <li>
                     <Link to="/register">Sign Up</Link>
