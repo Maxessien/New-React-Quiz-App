@@ -1,4 +1,4 @@
-@use "functions_mixins" as *;
+@use "../../../assets/functions_mixins" as *;
 
 .user-form {
   @include flex(flex-start, center, rem(20), column);

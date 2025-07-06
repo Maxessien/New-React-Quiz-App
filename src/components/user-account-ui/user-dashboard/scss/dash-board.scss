@@ -1,1 +1,63 @@
-@use "functions_mixins" as *;
+@use "../../../../assets/functions_mixins" as *;
+
+.user-dashboard {
+  @include flex(flex-start, flex-start, rem(25), column);
+  background: rgb(216, 204, 226);
+  padding: rem(20) rem(25);
+  height: 100vh;
+  h1 {
+    font-size: rem(40);
+    color: rgb(0, 0, 41);
+  }
+  h2 {
+    font-size: rem(30);
+    color: rgb(0, 0, 41);
+  }
+  .quiz-overview {
+    @include flex(center, space-between, rem(15));
+    width: 100%;
+    .overview-card {
+      border: 2px solid rgb(0, 27, 49);
+      border-radius: rem(8);
+      background: rgb(212, 212, 212);
+      padding: rem(10) rem(15);
+      p {
+        font-size: rem(17);
+        margin-top: rem(3);
+        font-weight: 600;
+      }
+    }
+  }
+
+  .progress{
+    @include flex(flex-start, center, rem(20), column);
+    width: 100%;
+    h3{
+      font-size: rem(25);
+      color: rgb(0, 12, 29);
+    }
+    p{
+      font-size: rem(25);
+      font-weight: 700;
+      color: rgb(0, 15, 27);
+      margin-bottom: rem(20);
+    }
+    .progress-bar-wrapper{
+      width: 100%;
+      @include flex(center, center);
+      .progress-bar{
+        position: relative;
+        width: rem(200);
+        height: rem(200);
+      }
+      span{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: rem(35);
+        font-weight: 700;
+      }
+    }
+  }
+}

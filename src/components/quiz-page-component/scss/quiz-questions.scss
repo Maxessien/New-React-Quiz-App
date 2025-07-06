@@ -1,4 +1,4 @@
-@use "functions_mixins" as *;
+@use "../../../assets/functions_mixins" as *;
 
 .quiz-main-content {
   @include flex(flex-start, space-between, rem(20));

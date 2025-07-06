@@ -1,0 +1,15 @@
+@use '../../../assets/functions_mixins' as *;
+
+.user-account-navigation{
+    // @include flex(flex-start, center);
+    height:  100vh;
+    background: rgb(0, 15, 32);
+    padding: rem(45) rem(15);
+    ul{
+    @include flex(center, center, rem(20), column);
+        li{
+            color: rgb(228, 228, 228);
+            font-size: rem(20);
+        }
+    }
+}

@@ -1,4 +1,4 @@
-@use "functions_mixins" as *;
+@use "../../../assets/functions_mixins" as *;
 
 .cta-section {
   @include flex(center, space-between);

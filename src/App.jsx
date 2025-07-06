@@ -6,6 +6,8 @@ import "./index.css";
 import Login from "./components/Forms/login-components/LogInPage";
 import SuccessPage from "./components/all-quiz-components/SuccessPage";
 import Csc102Lecture1 from "./components/all-quiz-components/Csc102Lecture1";
+import DashBoard from "./components/user-account-ui/user-dashboard/DashBoard";
+import UserQuizTab from "./components/user-account-ui/UserQuizTab/UserQuizTab";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/quiz/success" element={<SuccessPage />}></Route>
           <Route path="/quiz/csc-102-lecture-1" element={<Csc102Lecture1 />}></Route>
+          <Route path="/admin/dashboard" element={<DashBoard />}></Route>
+          <Route path='admin/quiz' element={<UserQuizTab />}></Route>
         </Routes>
       </BrowserRouter>
     </>

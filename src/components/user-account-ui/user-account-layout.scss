@@ -1,0 +1,7 @@
+@use '../../assets/functions_mixins' as *;
+
+.account-layout{
+    @include grid(15% 85%, auto, 0, 'true');
+    width: 100vw;
+    height: 100vh;
+}

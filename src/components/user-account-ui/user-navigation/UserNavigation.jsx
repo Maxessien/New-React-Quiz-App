@@ -1,12 +1,14 @@
+import './user-navigation.scss'
+
 function UserNavigation(){
     return(
         <>
         <nav className="user-account-navigation">
-            <ul className="user-account-nav-">
+            <ul>
                 <li>Dashboard</li>
-                <li>Dashboard</li>
-                <li>Dashboard</li>
-                <li>Dashboard</li>
+                <li>Quiz</li>
+                <li>Profile</li>
+                <li>Settings</li>
             </ul>
         </nav>
         </>
