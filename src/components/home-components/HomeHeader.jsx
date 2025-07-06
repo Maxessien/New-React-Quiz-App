@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross1 } from "react-icons/rx";
 // eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 function HomePageHeader() {
   const [mobileView, setMobileView] = useState(false);
@@ -22,7 +22,7 @@ function HomePageHeader() {
 
   useEffect(() => {
     window.addEventListener("resize", handleHamburgerMenu);
-    handleHamburgerMenu()
+    handleHamburgerMenu();
 
     return () => window.removeEventListener("resize", handleHamburgerMenu);
   }, []);
@@ -53,29 +53,35 @@ function HomePageHeader() {
                   <RxCross1 size={24} color="rgb(230, 230, 230)" />
                 </div>
               )}
-              <motion.nav
-              animate={{
-                opacity: [0.5, 1]
-              }}
-              transition={{
-                duration: 0.5
-              }}
-              className="home-nav">
-                <ul className="home-nav-list">
-                  <li>
-                    <Link to="/">Home</Link>
-                  </li>
-                  <li>
-                    <Link to="/quiz/success">Practice Quiz</Link>
-                  </li>
-                  <li>
-                    <Link to="/register">Sign Up</Link>
-                  </li>
-                  <li>
-                    <Link to="/login">Log In</Link>
-                  </li>
-                </ul>
-              </motion.nav>
+              <AnimatePresence>
+                <motion.nav
+                  animate={{
+                    opacity: [0.5, 1],
+                  }}
+                  exit={{
+                    opacity: 0.5,
+                  }}
+                  transition={{
+                    duration: 0.5,
+                  }}
+                  className="home-nav"
+                >
+                  <ul className="home-nav-list">
+                    <li>
+                      <Link to="/">Home</Link>
+                    </li>
+                    <li>
+                      <Link to="/quiz/success">Practice Quiz</Link>
+                    </li>
+                    <li>
+                      <Link to="/register">Sign Up</Link>
+                    </li>
+                    <li>
+                      <Link to="/login">Log In</Link>
+                    </li>
+                  </ul>
+                </motion.nav>
+              </AnimatePresence>
             </>
           )}
         </div>
