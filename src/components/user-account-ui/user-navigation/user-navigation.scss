@@ -1,15 +1,25 @@
 @use '../../../assets/functions_mixins' as *;
+@use "../../../assets/user-account-vairiables.scss" as *;
 
 .user-account-navigation{
-    // @include flex(flex-start, center);
-    height:  100vh;
-    background: rgb(0, 15, 32);
-    padding: rem(45) rem(15);
+    height:  100%;
+    max-width: 30%;
+    background: var(--nav-bg);
+    padding: rem(85) rem(35);
     ul{
     @include flex(center, center, rem(20), column);
         li{
-            color: rgb(228, 228, 228);
             font-size: rem(20);
         }
     }
+}
+.menu-toggle{
+    position: absolute;
+    top: rem(20);
+    left:rem(20);
+    padding: rem(10);
+    border-radius: 50%;
+    border: 2px solid var(--text-color);
+    background: var(--light-bg);
+    color: var(--text-color);
 }

@@ -1,2 +1,50 @@
 @use '../../../../assets/functions_mixins' as *;
+@use "../../../../assets/user-account-vairiables.scss" as *;
 
+.user-quiz-section{
+    padding: rem(20) rem(40);
+    header{
+        .filters{
+            @include flex(center, space-between, rem(20));
+            padding: rem(15) rem(25);
+            .search-bar{
+            @include flex(center, center, rem(5));
+                input{
+                    border: rem(2) solid var(--blue-border);
+                    border-radius: rem(4);
+                    padding: rem(3) rem(5);
+                    background-color: var(--light-bg);
+                    &:focus{
+                    // background-color: rgb(238, 238, 238);
+                    }
+                    // margin-right: rem(5);
+                }
+                button{
+                    cursor: pointer;
+                color: var(--text-color);
+                    &:hover{
+                        transform: scale(1.03);
+                    }
+                }
+            }
+
+            .filter-btn{
+                padding: rem(7) rem(10);
+                border-radius: rem(5);
+                border: 2px solid var(--blue-border);
+                background: var(--light-bg);
+                color: var(--text-color);
+                cursor: pointer;
+                &:active{
+                    filter: brightness(1.03);
+                }
+            }
+        }
+
+        .filter-wrapper{
+            @include flex(flex-start, space-between, rem(20));
+            z-index: 999;
+            padding: rem(20);
+        }
+    }
+}
