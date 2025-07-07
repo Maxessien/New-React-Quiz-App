@@ -3,9 +3,14 @@
 
 .user-account-navigation{
     height:  100%;
-    max-width: 30%;
     background: var(--nav-bg);
     padding: rem(85) rem(35);
+    @include media(medium){
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translateX(-200%)
+    }
     ul{
     @include flex(center, center, rem(20), column);
         li{
@@ -16,10 +21,11 @@
 .menu-toggle{
     position: absolute;
     top: rem(20);
-    left:rem(20);
+    right:rem(20);
     padding: rem(10);
     border-radius: 50%;
     border: 2px solid var(--text-color);
     background: var(--light-bg);
     color: var(--text-color);
+    z-index: 9999;
 }

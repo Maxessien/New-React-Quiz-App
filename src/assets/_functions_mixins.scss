@@ -10,7 +10,7 @@
   flex-direction: $direction;
   gap: $gap;
 }
-@mixin grid($column: auto, $row: auto, $grid-gap, $custom: "false") {
+@mixin grid($column: auto, $row: auto, $grid-gap: 0, $custom: "false") {
   display: grid;
   gap: $grid-gap;
   @if $custom == "true" {

@@ -8,8 +8,24 @@ import SuccessPage from "./components/all-quiz-components/SuccessPage";
 import Csc102Lecture1 from "./components/all-quiz-components/Csc102Lecture1";
 import DashBoard from "./components/user-account-ui/user-dashboard/DashBoard";
 import UserQuizTab from "./components/user-account-ui/UserQuizTab/UserQuizTab";
+import useMobileView from "./components/stores-component/WindowWidthState";
+import { useEffect } from "react";
 
 function App() {
+  const {setMobileView} = useMobileView()
+  useEffect(()=>{
+    const mobileCheck = ()=>{
+      if (window.innerWidth < 768) {
+        setMobileView(true)
+      }else{
+        setMobileView(false)
+      }
+    }
+    window.addEventListener('resize', mobileCheck)
+    mobileCheck()
+    return ()=>window.removeEventListener('resize', mobileCheck)
+  }, [])
+
   return (
     <>
       <BrowserRouter>

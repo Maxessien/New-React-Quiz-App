@@ -5,6 +5,7 @@
   @include flex(flex-start, flex-start, rem(25), column);
   padding: rem(20) rem(25);
   height: 100vh;
+  min-height: max-content;
   h2 {
     font-size: rem(30);
   }

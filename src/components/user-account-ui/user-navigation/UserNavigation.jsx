@@ -4,14 +4,19 @@ import {Link} from "react-router-dom";
 import {motion} from 'framer-motion'
 import { useState } from 'react';
 import {HiChevronRight,HiChevronLeft} from 'react-icons/hi'
+import useMobileView from './../../stores-component/WindowWidthState';
 
 function UserNavigation(){
     const [navOpen, setNavOpen] = useState(false)
+    const {mobileView} = useMobileView()
+    useState(()=>{
+        mobileView ? setNavOpen(false) : null
+    }, [])
     return(
         <>
-        <div onClick={()=>setNavOpen(!navOpen)} className='menu-toggle'>
-            {navOpen ? <HiChevronRight /> : <HiChevronLeft />}
-        </div>
+        {mobileView && (<div onClick={()=>setNavOpen(!navOpen)} className='menu-toggle'>
+            {!navOpen ? <HiChevronRight /> : <HiChevronLeft />}
+        </div>)}
         <motion.nav
         variants={{
             hidden: {opacity: 0,
@@ -22,7 +27,7 @@ function UserNavigation(){
             }
         }}
         initial='hidden'
-        animate={navOpen ? 'hidden' : 'visible'}
+        animate={!navOpen ? 'hidden' : 'visible'}
         transition={{
             duration: 1.2
         }}

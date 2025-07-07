@@ -2,7 +2,9 @@
 @use "../../assets/user-account-vairiables.scss" as *;
 
 .account-layout {
-  display: flex;
+  @include media(medium, "", min-width) {
+    @include grid(20% 80%, auto, 0, "true");
+  }
   background: var(--body-bg);
   width: 100vw;
   height: 100vh;
@@ -12,7 +14,10 @@
     color: rgb(0, 0, 41);
   }
 
-  h1,h2,h3,h4{
+  h1,
+  h2,
+  h3,
+  h4 {
     color: var(--headers-color);
   }
 }
