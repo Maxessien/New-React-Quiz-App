@@ -12,11 +12,17 @@
   .quiz-overview {
     @include flex(center, space-between, rem(15));
     width: 100%;
+    @include media(medium) {
+      flex-direction: column;
+    }
     .overview-card {
       border: 2px solid var(--blue-border);
       border-radius: rem(8);
       background: var(--light-bg);
       padding: rem(10) rem(15);
+      @include media(medium) {
+        width: 100%;
+      }
       p {
         font-size: rem(17);
         margin-top: rem(3);
@@ -25,26 +31,26 @@
     }
   }
 
-  .progress{
+  .progress {
     @include flex(flex-start, center, rem(20), column);
     width: 100%;
-    h3{
+    h3 {
       font-size: rem(25);
     }
-    p{
+    p {
       font-size: rem(25);
       font-weight: 700;
       margin-bottom: rem(20);
     }
-    .progress-bar-wrapper{
+    .progress-bar-wrapper {
       width: 100%;
       @include flex(center, center);
-      .progress-bar{
+      .progress-bar {
         position: relative;
         width: rem(200);
         height: rem(200);
       }
-      span{
+      span {
         position: absolute;
         top: 50%;
         left: 50%;

@@ -8,6 +8,7 @@
   background: var(--body-bg);
   width: 100vw;
   height: 100vh;
+  min-height: max-content;
   color: var(--text-color);
   h1 {
     font-size: rem(40);

@@ -2,20 +2,20 @@ import './user-navigation.scss'
 import {Link} from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import {motion} from 'framer-motion'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {HiChevronRight,HiChevronLeft} from 'react-icons/hi'
 import useMobileView from './../../stores-component/WindowWidthState';
 
 function UserNavigation(){
     const [navOpen, setNavOpen] = useState(false)
     const {mobileView} = useMobileView()
-    useState(()=>{
-        mobileView ? setNavOpen(false) : null
-    }, [])
+    useEffect(()=>{
+        setNavOpen(!mobileView)
+    }, [mobileView])
     return(
         <>
         {mobileView && (<div onClick={()=>setNavOpen(!navOpen)} className='menu-toggle'>
-            {!navOpen ? <HiChevronRight /> : <HiChevronLeft />}
+            {!navOpen ? <HiChevronRight size={40} /> : <HiChevronLeft size={40} />}
         </div>)}
         <motion.nav
         variants={{
@@ -27,7 +27,7 @@ function UserNavigation(){
             }
         }}
         initial='hidden'
-        animate={!navOpen ? 'hidden' : 'visible'}
+        animate={navOpen ? 'visible' : 'hidden'}
         transition={{
             duration: 1.2
         }}

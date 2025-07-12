@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 const useMobileView = create((set)=>({
-    mobileView: false,
+    mobileView: true,
     setMobileView: (value)=>{
         set({mobileView : value})
     }

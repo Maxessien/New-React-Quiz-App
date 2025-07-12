@@ -10,11 +10,13 @@ import DashBoard from "./components/user-account-ui/user-dashboard/DashBoard";
 import UserQuizTab from "./components/user-account-ui/UserQuizTab/UserQuizTab";
 import useMobileView from "./components/stores-component/WindowWidthState";
 import { useEffect } from "react";
+import AvailableQuizzes from "./components/available-quizzes/AvailableQuizzes";
 
 function App() {
-  const {setMobileView} = useMobileView()
+  const {mobileView, setMobileView} = useMobileView()
   useEffect(()=>{
     const mobileCheck = ()=>{
+      console.log(mobileView, 'app')
       if (window.innerWidth < 768) {
         setMobileView(true)
       }else{
@@ -33,10 +35,11 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/quiz/success" element={<SuccessPage />}></Route>
-          <Route path="/quiz/csc-102-lecture-1" element={<Csc102Lecture1 />}></Route>
-          <Route path="/admin/dashboard" element={<DashBoard />}></Route>
-          <Route path='admin/quiz' element={<UserQuizTab />}></Route>
+          <Route path='/quiz' element={<AvailableQuizzes />} />
+          <Route path="/quiz/success" element={<SuccessPage />} />
+          <Route path="/quiz/csc-102-lecture-1" element={<Csc102Lecture1 />} />
+          <Route path="/admin/dashboard" element={<DashBoard />} />
+          <Route path='admin/quiz' element={<UserQuizTab />} />
         </Routes>
       </BrowserRouter>
     </>

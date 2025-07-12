@@ -7,17 +7,25 @@
         .filters{
             @include flex(center, space-between, rem(20));
             padding: rem(15) rem(25);
+            @include media(medium){
+                padding: rem(15) rem(0);
+            @include flex(flex-start, flex-start, rem(10), column);
+                    }
             .search-bar{
-            @include flex(center, center, rem(5));
+            @include flex(center, flex-start, rem(5));
+            width: 50%;
                 input{
                     border: rem(2) solid var(--blue-border);
                     border-radius: rem(4);
                     padding: rem(3) rem(5);
+                    // width: 90%;
                     background-color: var(--light-bg);
                     &:focus{
                     // background-color: rgb(238, 238, 238);
                     }
-                    // margin-right: rem(5);
+                    // @include media(medium){
+                    //     width: 90%;
+                    // }
                 }
                 button{
                     cursor: pointer;
