@@ -1,16 +1,24 @@
 import { useState, useEffect, useRef } from "react";
 import "./scss/quiz-questions.scss";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
-function QuizQuestions({ data, submitFunction, userAns }) {
+function QuizQuestions({ data, submitFunction, userAnswers }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selected, setSelected] = useState(null);
   const [submitText, setSubmitText] = useState("Submit");
   const selectedOptions = useRef([]);
 
+  useEffect(()=>{
+    for (let i = 0; i < data.length; i++) {
+        userAnswers.current[i] = "No Answer";
+      }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   function handleSelection(index, e) {
     selectedOptions.current[currentQuestion] = index;
-    userAns.current[currentQuestion] = e.target.value;
+     userAnswers.current[currentQuestion] = e.target.value;
     setSelected(index);
   }
 

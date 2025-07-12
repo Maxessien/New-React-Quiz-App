@@ -1,0 +1,22 @@
+@use '../../../assets/functions_mixins' as *;
+@use '../../../assets/user-account-vairiables.scss' as *;
+
+.available-quiz-main{
+    height: max-content;
+    width: 100vw;
+    padding: rem(20) rem(40);
+    background: var(--body-bg);
+    min-height: 100vh;
+    @include media(medium){
+        padding: rem(20) rem(30);
+    }
+    @include media(small){
+        padding: rem(20) rem(20);
+    }
+    h1{
+        font-size: rem(40);
+        color: var(--headers-color);
+        margin-bottom: rem(20);
+        text-align: center;
+    }
+}

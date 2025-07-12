@@ -9,24 +9,30 @@ import SuccessPage from "./components/all-quiz-components/SuccessPage";
 import DashBoard from "./components/user-account-ui/user-dashboard/DashBoard";
 import UserQuizTab from "./components/user-account-ui/UserQuizTab/UserQuizTab";
 import useMobileView from "./components/stores-component/WindowWidthState";
+import AvailableQuizList from "./components/layout-components/AvailableQuizList";
+import useQuizData from "./components/stores-component/QuizDataStore";
 import { useEffect } from "react";
-import AvailableQuizzes from "./components/available-quizzes/AvailableQuizzes";
+import LoadAvailableQuiz from "./components/all-quiz-components/LoadAvailableQuiz";
+// import AvailableQuizzes from "./components/available-quizzes/AvailableQuizzes";
 
 function App() {
-  const {mobileView, setMobileView} = useMobileView()
-  useEffect(()=>{
-    const mobileCheck = ()=>{
-      console.log(mobileView, 'app')
+  const { allTitles, fetchData, allIds } = useQuizData();
+  const { mobileView, setMobileView } = useMobileView();
+  useEffect(() => {
+    fetchData();
+    const mobileCheck = () => {
+      console.log(mobileView, "app");
       if (window.innerWidth < 768) {
-        setMobileView(true)
-      }else{
-        setMobileView(false)
+        setMobileView(true);
+      } else {
+        setMobileView(false);
       }
-    }
-    window.addEventListener('resize', mobileCheck)
-    mobileCheck()
-    return ()=>window.removeEventListener('resize', mobileCheck)
-  }, [])
+    };
+    window.addEventListener("resize", mobileCheck);
+    mobileCheck();
+    return () => window.removeEventListener("resize", mobileCheck);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -35,11 +41,18 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path='/quiz' element={<AvailableQuizzes />} />
+          <Route path="/quiz" element={<LoadAvailableQuiz />} />
           <Route path="/quiz/success" element={<SuccessPage />} />
-          <Route path="/quiz/load" element={<QuizPage index={1} />} />
+          {allTitles.map((_, i) => {
+            return (
+              <Route
+                path={`/quiz/${allIds[i]}`}
+                element={<QuizPage index={i} />}
+              />
+            );
+          })}
           <Route path="/admin/dashboard" element={<DashBoard />} />
-          <Route path='admin/quiz' element={<UserQuizTab />} />
+          <Route path="admin/quiz" element={<UserQuizTab />} />
         </Routes>
       </BrowserRouter>
     </>
@@ -47,4 +60,3 @@ function App() {
 }
 
 export default App;
-

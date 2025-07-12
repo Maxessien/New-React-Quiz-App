@@ -1,10 +1,10 @@
-import './user-navigation.scss'
+import './scss/user-navigation.scss'
 import {Link} from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import {motion} from 'framer-motion'
 import { useState, useEffect } from 'react';
 import {HiChevronRight,HiChevronLeft} from 'react-icons/hi'
-import useMobileView from './../../stores-component/WindowWidthState';
+import useMobileView from '../stores-component/WindowWidthState';
 
 function UserNavigation(){
     const [navOpen, setNavOpen] = useState(false)

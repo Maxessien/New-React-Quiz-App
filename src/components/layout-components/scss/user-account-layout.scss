@@ -1,5 +1,5 @@
-@use "../../assets/functions_mixins" as *;
-@use "../../assets/user-account-vairiables.scss" as *;
+@use "../../../assets/functions_mixins" as *;
+@use "../../../assets/user-account-vairiables.scss" as *;
 
 .account-layout {
   @include media(medium, "", min-width) {

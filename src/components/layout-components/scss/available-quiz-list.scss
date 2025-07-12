@@ -1,0 +1,24 @@
+@use "../../../assets/user-account-vairiables.scss" as *;
+@use "../../../assets/functions_mixins" as *;
+
+.available-quiz-list {
+  @include flex(flex-start, flex-start, rem(20), column);
+  width: 100%;
+  max-width: rem(768);
+//   padding: rem(20) rem(20);
+  // background: var(--body-bg);
+  .quiz-link {
+    padding: rem(10) rem(15);
+    border-radius: rem(5);
+    background: var(--text-color);
+    width: 100%;
+    color: var(--body-bg);
+    font-size: rem(25);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 200ms linear;
+    &:hover {
+      background: var(--headers-color);
+    }
+  }
+}

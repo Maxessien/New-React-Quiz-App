@@ -1,5 +1,5 @@
-import UserNavigation from "./user-navigation/UserNavigation";
-import './user-account-layout.scss'
+import UserNavigation from "./UserNavigation";
+import './scss/user-account-layout.scss'
 
 function UserAccountLayout({children}){
     return(

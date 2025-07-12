@@ -1,7 +1,6 @@
 import "./scss/dash-board.scss";
-import UserNavigation from "../user-navigation/UserNavigation.jsx";
+import UserAccountLayout from '../../layout-components/UserAccountLayout.jsx'
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
-import UserAccountLayout from "../UserAccountLayout.jsx";
 
 function DashBoard() {
   return (

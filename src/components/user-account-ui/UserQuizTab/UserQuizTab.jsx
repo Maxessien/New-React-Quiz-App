@@ -1,5 +1,5 @@
 import { FaFilter, FaSearch } from "react-icons/fa";
-import UserAccountLayout from "../UserAccountLayout";
+import UserAccountLayout from "../../layout-components/UserAccountLayout";
 import { useEffect, useState } from "react";
 import "./scss/user-quiz-tab.scss";
 

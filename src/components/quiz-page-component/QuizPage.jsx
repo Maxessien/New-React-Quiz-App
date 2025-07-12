@@ -7,7 +7,8 @@ import { toast, ToastContainer } from "react-toastify";
 import useQuizData from "../stores-component/QuizDataStore";
 
 function QuizPage({ index }) {
-  const { allData, fetchData, titlesFetch, allTitles } = useQuizData();
+  const { allData} = useQuizData();
+  const [showQuestions, setShowQuestions] = useState(false);
   useEffect(() => {
     console.log("effect");
     document.body.style.background = 'url("/PE.webp")';
@@ -15,8 +16,6 @@ function QuizPage({ index }) {
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundAttachment = "fixed";
-
-    titlesFetch()
 
     return () => {
       // reset styles if needed
@@ -41,15 +40,17 @@ function QuizPage({ index }) {
   //     const data = await fetched.json();
   //     console.log(data)
   //     setAllData(data);
-  //     for (let i = 0; i < data.length; i++) {
-  //       userAnswers.current[i] = "No Answer";
-  //     }
+      
   //   } catch (err) {
   //     err.message.toLowerCase().includes("failed to fetch")
   //       ? toast.error("Network error, please check your internet connection")
   //       : toast.error("Server Error, please try again later");
   //   }
   // }
+
+  const startQuiz = ()=>{
+    setShowQuestions(true);
+  }
 
   async function submitQuiz() {
     try {
@@ -72,10 +73,10 @@ function QuizPage({ index }) {
         <Results answersData={correctAnswers} userAnswers={userAnswers} questionsIndex={index} />
       ) : (
         <>
-          {!allData || allData.length === 0 ? (
+          {!showQuestions ? (
             <QuizIntro
-              fetchFunc={fetchData}
-              name={allTitles[index]}
+              startQuizProp={startQuiz}
+              questionsIndex={index}
             />
           ) : (
             <>
@@ -85,8 +86,8 @@ function QuizPage({ index }) {
               />
               <QuizQuestions
                 data={allData[index].questions ? allData[index].questions : allData}
+                userAnswers={userAnswers}
                 submitFunction={submitQuiz}
-                userAns={userAnswers}
               />
             </>
           )}

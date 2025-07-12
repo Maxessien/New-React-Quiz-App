@@ -1,14 +1,16 @@
 import { useState } from "react";
 import "./scss/quiz-intro.scss";
 import { motion } from "framer-motion";
+import useQuizData from "../stores-component/QuizDataStore";
 
-function QuizIntro({ fetchFunc, name }) {
+function QuizIntro({ startQuizProp, questionsIndex}) {
+  const {allTitles} = useQuizData()
   const [loadingState, setLoadingState] = useState("Start Quiz");
   motion;
   const handleClick = () => {
     setLoadingState("Loading...");
-    fetchFunc();
-    setLoadingState("Start Quiz")
+    startQuizProp();
+    setLoadingState("Start Quiz");
   };
   return (
     <>
@@ -26,7 +28,7 @@ function QuizIntro({ fetchFunc, name }) {
         }}
         className="intro-content"
       >
-        <h1>{name}</h1>
+        <h1>{allTitles[questionsIndex]}</h1>
 
         <form className="registry">
           <label htmlFor="userName">Enter Username(Optional)</label>
