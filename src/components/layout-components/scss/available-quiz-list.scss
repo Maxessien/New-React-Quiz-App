@@ -5,6 +5,7 @@
   @include flex(flex-start, flex-start, rem(20), column);
   width: 100%;
   max-width: rem(768);
+  margin: auto;
 //   padding: rem(20) rem(20);
   // background: var(--body-bg);
   .quiz-link {

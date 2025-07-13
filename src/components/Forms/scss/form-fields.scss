@@ -1,17 +1,17 @@
 @use "../../../assets/functions_mixins" as *;
+@use '../../../assets/forms-variables.scss' as *;
 
 .user-form {
   @include flex(flex-start, center, rem(20), column);
   label {
     font-size: rem(19);
-    color: rgb(31, 31, 31);
     width: 90%;
     @include flex(flex-start, center, rem(5), column);
     input {
       padding: rem(5);
       font-size: rem(18);
-      color: rgb(31, 31, 31);
-      border: 2px solid rgb(0, 68, 100);
+      color: var(--form-text-color);
+      box-shadow: inset 0.2px 0.2px 5px 0.9px var(--form-shadow);
       border-radius: rem(5);
       width: 100%;
     }
@@ -24,10 +24,10 @@
   button {
     display: block;
     width: 65%;
-    background: rgb(0, 85, 0);
+    background: var(--button-bg);
     padding: rem(5);
     text-align: center;
-    color: rgb(224, 224, 224);
+    color: var(--form-bg);
     text-shadow: 0.5px 0.7px 2px black;
     border-radius: rem(5);
     font-size: rem(20);
@@ -35,7 +35,7 @@
     cursor: pointer;
     transition: all 150ms linear;
     &:hover {
-      filter: brightness(1.2);
+      background: var(--button-bg-hover);
     }
   }
 }
