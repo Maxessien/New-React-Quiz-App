@@ -13,13 +13,19 @@ import AvailableQuizList from "./components/layout-components/AvailableQuizList"
 import useQuizData from "./components/stores-component/QuizDataStore";
 import { useEffect } from "react";
 import LoadAvailableQuiz from "./components/all-quiz-components/LoadAvailableQuiz";
+import { useQuery } from "@tanstack/react-query";
+import { ToastContainer } from "react-toastify";
 // import AvailableQuizzes from "./components/available-quizzes/AvailableQuizzes";
 
 function App() {
-  const { allTitles, fetchData, allIds } = useQuizData();
+  const { fetchData, allData } = useQuizData();
   const { mobileView, setMobileView } = useMobileView();
+  useQuery({
+    queryKey: ["quizData"],
+    queryFn: fetchData,
+    refetchOnReconnect: true,
+  });
   useEffect(() => {
-    fetchData();
     const mobileCheck = () => {
       console.log(mobileView, "app");
       if (window.innerWidth < 768) {
@@ -43,10 +49,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/quiz" element={<LoadAvailableQuiz />} />
           <Route path="/quiz/success" element={<SuccessPage />} />
-          {allTitles.map((_, i) => {
+          {allData.map(({id}, i) => {
             return (
               <Route
-                path={`/quiz/${allIds[i]}`}
+                path={`/quiz/${id[i]}`}
                 element={<QuizPage index={i} />}
               />
             );

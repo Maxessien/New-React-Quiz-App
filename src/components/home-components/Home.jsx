@@ -5,7 +5,7 @@ import HomeHeroSection from "./HomeHeroSection";
 // import "./scss/home-page.scss"
 
 function HomePage() {
-//   document.body.style.background = "black";
+  document.body.style.background = "black";
   return (
     <>
       <HomePageHeader />

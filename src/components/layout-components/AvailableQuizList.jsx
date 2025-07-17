@@ -4,14 +4,14 @@ import './scss/available-quiz-list.scss'
 
 
 function AvailableQuizList(){
-    const {allTitles, allIds} = useQuizData()
+    const {allData} = useQuizData()
     return (
         <>
         <ul className="available-quiz-list">
-            {allTitles.map((title, index)=>{
+            {allData.map(({title, id}, index)=>{
                 return (
-                    <li key={allIds[index]} className="quiz-link">
-                        <Link to={`/quiz/${allIds[index]}`}>
+                    <li key={id[index]} className="quiz-link">
+                        <Link to={`/quiz/${id[index]}`}>
                             {title}
                         </Link>
                     </li>

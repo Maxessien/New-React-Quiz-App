@@ -1,27 +1,48 @@
 import { FaFilter, FaSearch } from "react-icons/fa";
 import UserAccountLayout from "../../layout-components/UserAccountLayout";
-import { useEffect, useState } from "react";
+import { useState, useReducer, useEffect } from "react";
 import "./scss/user-quiz-tab.scss";
+import useQuizData from "../../stores-component/QuizDataStore";
+import { Link } from "react-router-dom";
+import AvailableQuizList from "../../layout-components/AvailableQuizList";
+// eslint-disable-next-line no-unused-vars
+import { AnimatePresence, motion } from "framer-motion";
+// import useDarkMode from "../../stores-component/DarkLightThemeStore";
+// import { useQuery } from "@tanstack/react-query";
 
 function UserQuizTab() {
-  const [courses, setCourses] = useState([]);
+  const { allData } = useQuizData();
   const [filterMenu, setFilterMenu] = useState(false);
-  const [filteredCourses, setFilteredCourses] = useState([]);
-  useEffect(() => {
-    async function fetchCourses() {
-      const fetchedData = await fetch("/courses.json");
-      const data = await fetchedData.json();
-      setCourses(data);
+  const courses = allData.map(({ course_code }) => {
+    return course_code;
+  });
+  // const [filteredCourses, setFilteredCourses] = useState([]);
+
+  const handleSelectedCourse = (state, action) => {
+    // console.log("stst", state);
+    // console.log("actt", action.type);
+    if (action.type === "all") {
+      return [...courses];
+    } else if (!state.includes(action.type)) {
+      return [...state, action.type];
+    } else {
+      return state.filter((st) => st !== action.type);
     }
-
-    fetchCourses();
-  }, []);
+  };
 
   useEffect(() => {
-    console.log(filteredCourses);
-  }, [filteredCourses]);
+    if (courses.length > 0 && selectedCategory.length < 1) {
+      dispatch({ type: "all" });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [courses]);
+
+  const [selectedCategory, dispatch] = useReducer(handleSelectedCourse, []);
+
   return (
     <UserAccountLayout>
+      {console.log(selectedCategory, "selected", courses, "ccc")}
+
       <section className="user-quiz-section">
         <header>
           <h1>QUIZ</h1>
@@ -37,52 +58,95 @@ function UserQuizTab() {
 
             <button
               className="filter-btn"
+              style={{background: filterMenu ? 'var(--blue-border)' : 'none'}}
               onClick={() => setFilterMenu(!filterMenu)}
             >
               <FaFilter /> Filter
             </button>
           </div>
 
+          <AnimatePresence mode="wait">
           {filterMenu && (
-            <div className="filter-wrapper">
+            <motion.div
+            variants={{
+              hidden: {
+                scaleY: 0,
+                transformOrigin: 'top'
+              },
+              visible: {
+                scaleY: 1,
+                transformOrigin: 'top'
+              }
+            }}
+            initial='hidden'
+            animate='visible'
+            exit='hidden'
+            transition={{
+              duration: 0.5
+            }}
+             className="filter-wrapper">
               <div className="category">
                 <h3>By course</h3>
-                <ul>
-                  {courses.map((course, index) => {
+                <ul className="all-courses">
+                  {allData.map(({ course_code }, index) => {
+                    console.log(index, course_code);
                     return (
                       <li
+                        style={{
+                          background: selectedCategory.includes(course_code)
+                            ? "var(--blue-border)"
+                            : "none",
+                        }}
                         key={index}
-                        onClick={() =>
-                          !filteredCourses.includes(course)
-                            ? setFilteredCourses([...filteredCourses, course])
-                            : null
-                        }
+                        onClick={() => dispatch({ type: course_code })}
                       >
-                        {course}
+                        {course_code}
                       </li>
                     );
                   })}
                 </ul>
+                <button onClick={() => dispatch({ type: "all" })}>Reset</button>
               </div>
 
-              <div className="completed-filter">
-                <label htmlFor="attempted">
-                  <input type="radio" id="attempted" name="completed-filter" />
-                  Attempted
-                </label>
+              <div className="completed-quiz-filter">
+                <input type="radio" id="attempted" name="completed-filter" />
+                <label htmlFor="attempted">Attempted</label>
 
-                <label htmlFor="not-attempted">
-                  <input
-                    type="radio"
-                    id="not-attempted"
-                    name="completed-filter"
-                  />
-                  Not Attempted
-                </label>
+                <input
+                  type="radio"
+                  id="not-attempted"
+                  name="completed-filter"
+                />
+                <label htmlFor="not-attempted">Not Attempted</label>
+                <input type="radio" id="all" name="completed-filter" />
+                <label htmlFor="all">All</label>
               </div>
-            </div>
+            </motion.div>
           )}
+          </AnimatePresence>
         </header>
+
+        {selectedCategory.length > 0 && (
+          <>
+            <section>
+              <ul className="user-available-quiz-list">
+                {allData.map(({ title, id, course_code }, index) => {
+                  return (
+                    <>
+                      {selectedCategory.includes(course_code) ? (
+                        <Link style={{width: '100%'}} to={`/quiz/${id[index]}`}>
+                        <li key={id} className="user-quiz-link">
+                          {title}
+                        </li>
+                          </Link>
+                      ) : null}
+                    </>
+                  );
+                })}
+              </ul>
+            </section>
+          </>
+        )}
       </section>
     </UserAccountLayout>
   );

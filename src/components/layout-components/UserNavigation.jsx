@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import {motion} from 'framer-motion'
 import { useState, useEffect } from 'react';
-import {HiChevronRight,HiChevronLeft} from 'react-icons/hi'
+import {FiMenu, FiX} from 'react-icons/fi'
 import useMobileView from '../stores-component/WindowWidthState';
 
 function UserNavigation(){
@@ -15,7 +15,7 @@ function UserNavigation(){
     return(
         <>
         {mobileView && (<div onClick={()=>setNavOpen(!navOpen)} className='menu-toggle'>
-            {!navOpen ? <HiChevronRight size={40} /> : <HiChevronLeft size={40} />}
+            {!navOpen ? <FiMenu size={30} /> : <FiX size={30} />}
         </div>)}
         <motion.nav
         variants={{

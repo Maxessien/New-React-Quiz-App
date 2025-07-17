@@ -5,6 +5,7 @@
   height: 100%;
   background: var(--nav-bg);
   padding: rem(85) rem(35);
+  z-index: 999;
   @include media(medium) {
     position: fixed;
     top: 0;
@@ -21,10 +22,6 @@
   position: absolute;
   top: rem(20);
   right: rem(20);
-  // padding: rem(0);
-  border-radius: 50%;
-  border: 2px solid var(--text-color);
-  background: var(--light-bg);
   color: var(--text-color);
   z-index: 9999;
 }

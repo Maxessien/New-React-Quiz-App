@@ -10,7 +10,6 @@ import useDarkMode from "../../stores-component/DarkLightThemeStore";
 function Register() {
   const { isDarkMode, setIsDarkMode } = useDarkMode();
   useEffect(() => {
-    console.log(isDarkMode);
     document.body.style.background = isDarkMode
       ? "linear-gradient(to bottom, rgb(0, 21, 27), rgb(38, 66, 75))"
       : "linear-gradient(to bottom, rgb(150, 149, 149), rgb(206, 206, 206))";

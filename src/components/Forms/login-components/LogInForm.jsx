@@ -9,8 +9,6 @@ function LoginForm() {
     formState: { errors, isSubmitting },
   } = useForm({ mode: "onTouched" });
 
-  console.log(useForm());
-
   const submitForm = (data) => {
     toast.success("Log In Successful");
     console.log(data);

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import useQuizData from "../stores-component/QuizDataStore";
 
 function QuizIntro({ startQuizProp, questionsIndex}) {
-  const {allTitles} = useQuizData()
+  const {allData} = useQuizData()
   const [loadingState, setLoadingState] = useState("Start Quiz");
   motion;
   const handleClick = () => {
@@ -28,7 +28,7 @@ function QuizIntro({ startQuizProp, questionsIndex}) {
         }}
         className="intro-content"
       >
-        <h1>{allTitles[questionsIndex]}</h1>
+        <h1>{allData[questionsIndex].title}</h1>
 
         <form className="registry">
           <label htmlFor="userName">Enter Username(Optional)</label>
