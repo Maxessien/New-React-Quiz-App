@@ -116,35 +116,4 @@
       }
     }
   }
-
-  section{
-    .user-available-quiz-list{
-      @include flex(flex-start, flex-start, rem(15), column);
-      padding: rem(20) rem(30);
-      @include media(medium){
-        padding: rem(20) rem(20);
-      }
-      @include media(small){
-        padding: rem(15) rem(5);
-      }
-      .user-quiz-link{
-        font-size: rem(25);
-        font-weight: 600;
-        background: var(--light-bg);
-        padding: rem(10) rem(15);
-        width: 100%;
-        border-radius: rem(5);
-        transition: all 100ms linear;
-      //   @include media(medium){
-      //   padding: rem(20) rem(10);
-      // }
-      @include media(small){
-        font-size: rem(19);
-      }
-        &:hover{
-          border: 2px solid var(--blue-border);
-        }
-      }
-    }
-  }
 }
