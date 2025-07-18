@@ -15,11 +15,14 @@ import { useEffect } from "react";
 import LoadAvailableQuiz from "./components/all-quiz-components/LoadAvailableQuiz";
 import { useQuery } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
+import UserSettings from "./components/user-account-ui/user-settings/UserSettings";
+import useDarkMode from "./components/stores-component/DarkLightThemeStore";
 // import AvailableQuizzes from "./components/available-quizzes/AvailableQuizzes";
 
 function App() {
   const { fetchData, allData } = useQuizData();
   const { mobileView, setMobileView } = useMobileView();
+  const {setIsDarkMode} = useDarkMode()
   useQuery({
     queryKey: ["quizData"],
     queryFn: fetchData,
@@ -36,6 +39,7 @@ function App() {
     };
     window.addEventListener("resize", mobileCheck);
     mobileCheck();
+    setIsDarkMode('system')
     return () => window.removeEventListener("resize", mobileCheck);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -52,13 +56,14 @@ function App() {
           {allData.map(({id}, i) => {
             return (
               <Route
-                path={`/quiz/${id[i]}`}
+                path={`/quiz/${id}`}
                 element={<QuizPage index={i} />}
               />
             );
           })}
           <Route path="/admin/dashboard" element={<DashBoard />} />
           <Route path="admin/quiz" element={<UserQuizTab />} />
+          <Route path='admin/settings' element={<UserSettings />} />
         </Routes>
       </BrowserRouter>
     </>

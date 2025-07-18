@@ -5,7 +5,7 @@ function UserAccountLayout({children}){
     return(
         <div className="account-layout">
         <UserNavigation />
-        <main>{children}</main>
+        {children}
         </div>
     )
 }

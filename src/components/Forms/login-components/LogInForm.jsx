@@ -1,17 +1,26 @@
 import { useForm } from "react-hook-form";
 import "../scss/form-fields.scss";
 import { toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({ mode: "onTouched" });
 
-  const submitForm = (data) => {
-    toast.success("Log In Successful");
-    console.log(data);
+  const admin = {
+    adminEmail: "admin@gmail.com",
+    adminPassword: "maxadmin12354",
+  };
+
+  const submitForm = ({ email, password }) => {
+    const { adminEmail, adminPassword } = admin;
+    email === adminEmail && password === adminPassword
+      ? navigate("/admin/dashboard")
+      : toast.error("Only admin access is allowed");
   };
   return (
     <>

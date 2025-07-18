@@ -11,7 +11,7 @@ function AvailableQuizList(){
             {allData.map(({title, id}, index)=>{
                 return (
                     <li key={id[index]} className="quiz-link">
-                        <Link to={`/quiz/${id[index]}`}>
+                        <Link to={`/quiz/${id}`}>
                             {title}
                         </Link>
                     </li>

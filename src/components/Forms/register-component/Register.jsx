@@ -8,13 +8,11 @@ import useDarkMode from "../../stores-component/DarkLightThemeStore";
 // import BgDesign from "../../home-components/BgDesign";
 
 function Register() {
-  const { isDarkMode, setIsDarkMode } = useDarkMode();
+  const { isDarkMode } = useDarkMode();
   useEffect(() => {
     document.body.style.background = isDarkMode
       ? "linear-gradient(to bottom, rgb(0, 21, 27), rgb(38, 66, 75))"
       : "linear-gradient(to bottom, rgb(150, 149, 149), rgb(206, 206, 206))";
-
-    setIsDarkMode();
     return () => (document.body.style.background = "");
   }, [isDarkMode]);
 

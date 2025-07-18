@@ -1,20 +1,19 @@
-@media (prefers-color-scheme: dark) {
-  :root {
-    --headers-color: rgb(224, 224, 224);
-    --body-bg: rgb(27, 27, 27);
-    --light-bg:  rgb(39, 39, 39);
-    --text-color: rgb(231, 231, 231);
-    --blue-border: rgb(0, 79, 170);
-    --nav-bg: rgb(0, 33, 36);
-  }
+:root[theme="dark"] {
+  --headers-color: rgb(224, 224, 224);
+  --body-bg: rgb(27, 27, 27);
+  --light-bg: rgb(39, 39, 39);
+  --hover-light-bg: rgb(58, 58, 58);
+  --text-color: rgb(231, 231, 231);
+  --blue-border: rgb(0, 79, 170);
+  --nav-bg: rgb(0, 33, 36);
 }
-@media (prefers-color-scheme: light) {
-  :root {
-    --headers-color: rgb(0, 31, 39);
-    --body-bg: rgb(223, 223, 223);
-    --light-bg:  rgb(189, 189, 189);
-    --text-color: rgb(41, 41, 41);
-    --blue-border: rgb(0, 22, 49);
-    --nav-bg: rgb(100, 124, 126);
-  }
+
+:root[theme="light"] {
+  --headers-color: rgb(0, 31, 39);
+  --body-bg: rgb(223, 223, 223);
+  --light-bg: rgb(189, 189, 189);
+  --hover-light-bg: rgb(148, 148, 148);
+  --text-color: rgb(41, 41, 41);
+  --blue-border: rgb(0, 22, 49);
+  --nav-bg: rgb(100, 124, 126);
 }
