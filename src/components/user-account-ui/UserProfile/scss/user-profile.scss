@@ -4,10 +4,10 @@
 .user-profile-section {
   @include flex(flex-start, flex-start, rem(20), column);
   padding: rem(25) rem(40);
-  @include media(small){
+  width: 100%;
+  @include media(small) {
     padding: rem(25) rem(15);
   }
-  width: 100vw;
   .user-profile-image {
     width: rem(100);
     height: rem(100);
@@ -32,7 +32,8 @@
         border-radius: rem(5);
         border: rem(2) solid var(--blue-border);
         &:disabled {
-            border: none;
+          border: none;
+          color: var(--fade-text-color);
         }
         // &:focus{
         // }
@@ -45,17 +46,8 @@
     }
     .form-btns {
       button {
-        background: var(--text-color);
-        color: var(--body-bg);
-        padding: rem(5) rem(10);
-        font-size: rem(18);
-        font-weight: 600;
-        border-radius: rem(5);
-        cursor: pointer;
-        transition: all 150ms linear;
-        &:hover {
-          opacity: 0.85;
-        }
+        @include button(rem(5) rem(10), var(--text-color), null, rem(5), var(--fade-text-color));
+        @include text(rem(18), 600, var(--body-bg));
         &:first-child {
           margin-right: rem(25);
         }

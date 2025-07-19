@@ -1,8 +1,12 @@
 import { useForm } from "react-hook-form";
 import "../scss/form-fields.scss";
 import { toast, ToastContainer } from "react-toastify";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import useUserData from "../../stores-component/UsersData";
 
 function RegisterForm() {
+  const {fetchUsersData} = useUserData()
   const {
     register,
     handleSubmit,
@@ -10,19 +14,22 @@ function RegisterForm() {
     formState: { errors, isSubmitting },
   } = useForm({ mode: "onTouched" });
 
+  const navigate = useNavigate()
+
   const submitForm = (data) => {
-    toast.success("Registration Successful");
     async function submitData() {
       try {
-        const response = await fetch("http://127.0.0.1:5000/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        });
-        const result = await response.json();
-        console.log(result);
+        const userExist = await fetchUsersData(data, 'register')
+        if (!userExist){
+          console.log(userExist)
+          const response = await axios.post("http://127.0.0.1:5000/register", data);
+          const result = response;
+          toast.success("Registration Successful");
+          navigate('/login')
+          console.log(result);
+        }else{
+          toast.error('User already exists')
+        }
       } catch (error) {
         console.error("Submission failed:", error);
       }
