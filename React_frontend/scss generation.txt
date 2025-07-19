@@ -1,0 +1,2 @@
+# PowerShell one-liner (copy and paste)
+$cwd = Get-Location; mkdir scss -Force; mkdir css -Force; Get-ChildItem *.jsx | ForEach-Object { $name = "$($_.BaseName).scss"; New-Item -Path "$cwd\scss\$name" -ItemType File -Force }; sass --no-source-map --watch "$cwd\scss":"$cwd\css"
