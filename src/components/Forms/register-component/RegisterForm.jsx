@@ -22,7 +22,8 @@ function RegisterForm() {
         const userExist = await fetchUsersData(data, 'register')
         if (!userExist){
           console.log(userExist)
-          const response = await axios.post("http://127.0.0.1:5000/register", data);
+          // const response = await axios.post("http://127.0.0.1:5000/register", data);
+          const response = await axios.post("https://max-quiz-app-backend.onrender.com/register", data);
           const result = response;
           toast.success("Registration Successful");
           navigate('/login')

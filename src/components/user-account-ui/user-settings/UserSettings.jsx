@@ -3,20 +3,23 @@ import UserAccountLayout from "../../layout-components/UserAccountLayout";
 import "./scss/user-settings.scss";
 import useDarkMode from "../../stores-component/DarkLightThemeStore";
 import { useNavigate } from "react-router-dom";
+import useUserData from "../../stores-component/UsersData";
 
 function UserSettings() {
-    const {isDarkMode, setIsDarkMode, selectedTheme} = useDarkMode()
-    const navigate = useNavigate()
+  const { isDarkMode, setIsDarkMode, selectedTheme } = useDarkMode();
+  const { userData, logOut } = useUserData();
+  const navigate = useNavigate();
   const handleSelectedTheme = (e) => {
     const theme = e.target.value;
 
-    setIsDarkMode(theme)
+    setIsDarkMode(theme);
   };
 
-  const handleLogout =()=>{
-    navigate('/login')
-    setIsDarkMode('system')
-  }
+  const handleLogout = () => {
+    navigate("/login");
+    logOut();
+    setIsDarkMode("system");
+  };
 
   return (
     <>
@@ -29,14 +32,25 @@ function UserSettings() {
                 <FaUser style={{ marginRight: 10 }} size={20} /> Account
               </span>
               <span>
-                <FaPen size={15} style={{cursor: 'pointer'}} onClick={()=>navigate('/admin/profile')} />
+                <FaPen
+                  size={15}
+                  style={{ cursor: "pointer" }}
+                  onClick={() =>
+                    navigate(`/${userData.userId.trim().toLowerCase()}/profile`)
+                  }
+                />
               </span>
             </h2>
             <div className="account-info">
               <p>Username: Max Essien</p>
               <p>Email: max@gmail.com</p>
             </div>
-            <button onClick={()=>handleLogout()} className="settings-logout-btn">Log Out</button>
+            <button
+              onClick={() => handleLogout()}
+              className="settings-logout-btn"
+            >
+              Log Out
+            </button>
           </section>
 
           <section className="preference-settings">
@@ -68,7 +82,9 @@ function UserSettings() {
               <label
                 style={{
                   background:
-                    isDarkMode && selectedTheme !== "system" ? "var(--blue-border)" : "none",
+                    isDarkMode && selectedTheme !== "system"
+                      ? "var(--blue-border)"
+                      : "none",
                 }}
                 htmlFor="dark-theme-preference"
               >
@@ -84,7 +100,9 @@ function UserSettings() {
               <label
                 style={{
                   background:
-                    !isDarkMode && selectedTheme !== "system" ? "rgba(106, 150, 156, 1)" : "none",
+                    !isDarkMode && selectedTheme !== "system"
+                      ? "rgba(106, 150, 156, 1)"
+                      : "none",
                 }}
                 htmlFor="light-theme-preference"
               >

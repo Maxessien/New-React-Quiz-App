@@ -18,12 +18,14 @@ import { ToastContainer } from "react-toastify";
 import UserSettings from "./components/user-account-ui/user-settings/UserSettings";
 import useDarkMode from "./components/stores-component/DarkLightThemeStore";
 import UserProfile from "./components/user-account-ui/UserProfile/UserProfile";
+import useUserData from "./components/stores-component/UsersData";
 // import AvailableQuizzes from "./components/available-quizzes/AvailableQuizzes";
 
 function App() {
   const { fetchData, allData } = useQuizData();
   const { mobileView, setMobileView } = useMobileView();
-  const {setIsDarkMode} = useDarkMode()
+  const { setIsDarkMode } = useDarkMode();
+  const { userData, loggedIn } = useUserData();
   useQuery({
     queryKey: ["quizData"],
     queryFn: fetchData,
@@ -40,13 +42,14 @@ function App() {
     };
     window.addEventListener("resize", mobileCheck);
     mobileCheck();
-    setIsDarkMode('system')
+    setIsDarkMode("system");
     return () => window.removeEventListener("resize", mobileCheck);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
+      {console.log(loggedIn)}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -54,18 +57,32 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/quiz" element={<LoadAvailableQuiz />} />
           <Route path="/quiz/success" element={<SuccessPage />} />
-          {allData.map(({id}, i) => {
+          {allData.map(({ id }, i) => {
             return (
-              <Route
-                path={`/quiz/${id}`}
-                element={<QuizPage index={i} />}
-              />
+              <Route path={`/quiz/${id}`} element={<QuizPage index={i} />} />
             );
           })}
-          <Route path="/admin/dashboard" element={<DashBoard />} />
-          <Route path="admin/quiz" element={<UserQuizTab />} />
-          <Route path='admin/settings' element={<UserSettings />} />
-          <Route path='admin/profile' element={<UserProfile />} />
+          {loggedIn && (
+            <>
+              {console.log(userData.name.trim(), "app")}
+              <Route
+                path={`/${userData.userId.trim().toLowerCase()}/dashboard`}
+                element={<DashBoard />}
+              />
+              <Route
+                path={`/${userData.userId.trim().toLowerCase()}/quiz`}
+                element={<UserQuizTab />}
+              />
+              <Route
+                path={`/${userData.userId.trim().toLowerCase()}/settings`}
+                element={<UserSettings />}
+              />
+              <Route
+                path={`/${userData.userId.trim().toLowerCase()}/profile`}
+                element={<UserProfile />}
+              />
+            </>
+          )}
         </Routes>
       </BrowserRouter>
     </>

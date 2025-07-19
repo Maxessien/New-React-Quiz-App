@@ -19,10 +19,10 @@ function LoginForm() {
   // };
 
   const submitForm = async (data) => {
-    const success = await fetchUsersData(data, 'login');
+    const user = await fetchUsersData(data, 'login');
     // const { adminEmail, adminPassword } = admin;
-    if (success) {
-      navigate("/admin/dashboard");
+    if (user) {
+     navigate(`/${user.userId.trim().toLowerCase()}/dashboard`);
     } else {
       toast.error("Invalid Email or Password");
     }

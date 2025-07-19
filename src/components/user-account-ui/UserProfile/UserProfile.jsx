@@ -20,7 +20,8 @@ function UserProfile() {
     defaultValues: userData,
   });
   const handleSave = async (data) => {
-    await axios.post("http://127.0.0.1:5000/update", data);
+    // await axios.post("http://127.0.0.1:5000/update", data);
+    await axios.post("https://max-quiz-app-backend.onrender.com/update", data);
     setUserData(data);
     setEditForm(true);
     setShowPassword(false);

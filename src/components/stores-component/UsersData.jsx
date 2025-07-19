@@ -12,7 +12,8 @@ const useUserData = create((set) => ({
   fetchUsersData: async (data, type) => {
     console.log("sending");
     try {
-      const response = await axios.get(`http://127.0.0.1:5000/login`);
+      // const response = await axios.get(`http://127.0.0.1:5000/login`);
+      const response = await axios.get(`https://max-quiz-app-backend.onrender.com/login`);
       const user = response.data.find(({ email, password }) => {
         if (type === "login") {
           return data.email === email && data.password === password;
@@ -24,11 +25,14 @@ const useUserData = create((set) => ({
       if (user) {
         set({ userData: user });
         set({ loggedIn: true });
-        console.log(user, "logged");
-        return true;
+        if (type==='login') {
+          return user
+        } else {
+          return true;
+        }
       } else {
         set({ loggedIn: false });
-        console.log(user, "logged");
+        set({ userData: {} });
         return false;
       }
     } catch (error) {
@@ -36,6 +40,10 @@ const useUserData = create((set) => ({
       return false;
     }
   },
+  logOut: ()=>{
+        set({ loggedIn: false });
+        set({ userData: {} });
+  }
 }));
 
 export default useUserData;
