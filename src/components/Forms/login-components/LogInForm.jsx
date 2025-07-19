@@ -26,7 +26,7 @@ function LoginForm() {
     <>
       <form onSubmit={handleSubmit(submitForm)} className="user-form">
         <label htmlFor="email">
-          Email{" "}
+          Email
           <input
             type="email"
             id="email"

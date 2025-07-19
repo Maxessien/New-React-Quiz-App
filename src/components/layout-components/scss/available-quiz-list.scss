@@ -4,6 +4,7 @@
 .available-quiz-list {
   @include flex(flex-start, flex-start, rem(15), column);
   padding: rem(20) rem(30);
+  max-width: rem(768);
   @include media(medium) {
     padding: rem(20) rem(20);
   }
@@ -19,9 +20,7 @@
     color: var(--text-color);
     border-radius: rem(5);
     transition: all 100ms linear;
-    //   @include media(medium){
-    //   padding: rem(20) rem(10);
-    // }
+    cursor: pointer;
     @include media(small) {
       font-size: rem(19);
     }
