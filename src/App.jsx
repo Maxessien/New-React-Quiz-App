@@ -17,6 +17,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
 import UserSettings from "./components/user-account-ui/user-settings/UserSettings";
 import useDarkMode from "./components/stores-component/DarkLightThemeStore";
+import UserProfile from "./components/user-account-ui/UserProfile/UserProfile";
 // import AvailableQuizzes from "./components/available-quizzes/AvailableQuizzes";
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
           <Route path="/admin/dashboard" element={<DashBoard />} />
           <Route path="admin/quiz" element={<UserQuizTab />} />
           <Route path='admin/settings' element={<UserSettings />} />
+          <Route path='admin/profile' element={<UserProfile />} />
         </Routes>
       </BrowserRouter>
     </>

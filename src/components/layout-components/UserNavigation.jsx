@@ -35,7 +35,7 @@ function UserNavigation(){
             <ul>
                 <li><Link to={"/admin/dashboard"}>DashBoard</Link></li>
                 <li><Link to={"/admin/quiz"}>Quiz</Link></li>
-                <li>Profile</li>
+                <li><Link to={"/admin/profile"}>Profile</Link></li>
                 <li><Link to={'/admin/settings'}>Settings</Link></li>
             </ul>
         </motion.nav>

@@ -13,6 +13,11 @@ function UserSettings() {
     setIsDarkMode(theme)
   };
 
+  const handleLogout =()=>{
+    navigate('/login')
+    setIsDarkMode('system')
+  }
+
   return (
     <>
       <UserAccountLayout>
@@ -24,14 +29,14 @@ function UserSettings() {
                 <FaUser style={{ marginRight: 10 }} size={20} /> Account
               </span>
               <span>
-                <FaPen size={15} />
+                <FaPen size={15} style={{cursor: 'pointer'}} onClick={()=>navigate('/admin/profile')} />
               </span>
             </h2>
             <div className="account-info">
               <p>Username: Max Essien</p>
               <p>Email: max@gmail.com</p>
             </div>
-            <button onClick={()=>navigate('/login')} className="settings-logout-btn">Log Out</button>
+            <button onClick={()=>handleLogout()} className="settings-logout-btn">Log Out</button>
           </section>
 
           <section className="preference-settings">

@@ -1,0 +1,57 @@
+@use "../../../../assets/functions_mixins" as *;
+@use "../../../../assets/user-account-vairiables.scss" as *;
+
+.user-profile-section {
+  @include flex(flex-start, flex-start, rem(20), column);
+  padding: rem(25) rem(40);
+  .user-profile-image {
+    width: rem(100);
+    height: rem(100);
+    border-radius: 50%;
+    border: rem(3) solid var(--blue-border);
+    @include flex(center, center);
+    font-size: rem(60);
+  }
+  .user-profile-form {
+    @include flex(flex-start, flex-start, rem(15), column);
+    label {
+      @include flex(flex-start, flex-start, rem(5), column);
+      font-size: rem(20);
+      input {
+        background: var(--light-bg);
+        padding: rem(5) rem(15);
+        color: var(--text-color);
+        border-radius: rem(5);
+        border: rem(2) solid var(--blue-border);
+        &:disabled {
+            border: none;
+        }
+        // &:focus{
+        // }
+      }
+      .password-input-wrapper {
+        input {
+          margin-right: rem(10);
+        }
+      }
+    }
+    .form-btns {
+      button {
+        background: var(--text-color);
+        color: var(--body-bg);
+        padding: rem(5) rem(10);
+        font-size: rem(18);
+        font-weight: 600;
+        border-radius: rem(5);
+        cursor: pointer;
+        transition: all 150ms linear;
+        &:hover {
+          opacity: 0.85;
+        }
+        &:first-child {
+          margin-right: rem(25);
+        }
+      }
+    }
+  }
+}
