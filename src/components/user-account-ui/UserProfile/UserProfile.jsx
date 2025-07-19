@@ -52,7 +52,8 @@ function UserProfile() {
             </label>
             <label htmlFor="password">
               <span className="input-tag">Password</span>
-              <span className="password-input-wrapper">
+              {/* <span className="password-input-wrapper">
+              </span> */}
                 <input
                   disabled={editForm}
                   type={showPassword ? "text" : "password"}
@@ -60,23 +61,26 @@ function UserProfile() {
                   value={"maxessien"}
                 />
                 {showPassword ? (
+                    <div>
                   <FaEye
                     style={{ cursor: "pointer" }}
                     onClick={() =>
                       editForm ? true : setShowPassword(!showPassword)
                     }
                     size={20}
-                  />
+                  /> <span style={{marginLeft: `${10/16}rem`}}>Hide Password</span>
+                    </div>
                 ) : (
+                    <div>
                   <FaEyeSlash
                     style={{ cursor: "pointer" }}
                     onClick={() =>
                       editForm ? true : setShowPassword(!showPassword)
                     }
                     size={20}
-                  />
+                  /> <span style={{marginLeft: `${10/16}rem`}}>Show Password</span>
+                    </div>
                 )}
-              </span>
             </label>
 
             <div className="form-btns">
