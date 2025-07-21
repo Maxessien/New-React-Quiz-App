@@ -30,8 +30,12 @@ function Results({ answersData, userAnswers, questionsIndex, dataAtIndex }) {
       console.log(newAccountData.score, 'new')
       userAccountData.quizzesTaken.push(newAccountData);
       const updateBackend = async () => {
+        // const res = await axios.post(
+        //   "http://127.0.0.1:5000/update_account_data",
+        //   userAccountData
+        // );
         const res = await axios.post(
-          "http://127.0.0.1:5000/update_account_data",
+          "https://max-quiz-app-backend.onrender.com/update_account_data",
           userAccountData
         );
         console.log(res);

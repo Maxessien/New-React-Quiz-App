@@ -14,7 +14,8 @@ const useUserData = create((set) => ({
   fetchUsersData: async (data, type) => {
     try {
       set({isLoading: true})
-      const response = await axios.post(`http://127.0.0.1:5000/${type}`, data);
+      // const response = await axios.post(`http://127.0.0.1:5000/${type}`, data);
+      const response = await axios.post(`https://max-quiz-app-backend.onrender.com/${type}`, data);
       if (response.data) {
         set({ userData: response.data });
         type === 'login' ? set({ loggedIn: true }) : set({ loggedIn: false });
@@ -34,9 +35,10 @@ const useUserData = create((set) => ({
   fetchUserAccountData: async (data)=>{
     try {
       // console.log(data, 'stta')
-      const response = await axios.post('http://127.0.0.1:5000/account_data', data)
+      // const response = await axios.post('http://127.0.0.1:5000/account_data', data)
+      const response = await axios.post('https://max-quiz-app-backend.onrender.com/account_data', data)
       console.log('fetching', response)
-      
+
       set({userAccountData: response.data})
       return response.data
     } catch (error) {

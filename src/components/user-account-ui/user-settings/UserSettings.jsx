@@ -17,7 +17,11 @@ function UserSettings() {
   };
 
   const handleAccountDataReset = async () => {
-    const res = await axios.post("http://127.0.0.1:5000/update_account_data", {
+    // const res = await axios.post("http://127.0.0.1:5000/update_account_data", {
+    //   quizzesTaken: [],
+    //   userId: "21641dfa-65b7-4aaa-9fe9-418286555152",
+    // });
+    const res = await axios.post("https://max-quiz-app-backend.onrender.com/update_account_data", {
       quizzesTaken: [],
       userId: "21641dfa-65b7-4aaa-9fe9-418286555152",
     });

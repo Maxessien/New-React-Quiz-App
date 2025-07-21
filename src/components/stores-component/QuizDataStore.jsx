@@ -5,12 +5,12 @@ const useQuizData = create((set) => ({
   allData: [],
   fetchData: async () => {
     try {
-      // const fetched = await fetch(
-      //   "https://raw.githubusercontent.com/Maxessien/Test-API-Fetch-/main/all-quiz-data.json"
-      // );
       const fetched = await fetch(
-        "/all-quiz-data.json"
+        "https://raw.githubusercontent.com/Maxessien/Test-API-Fetch-/main/all-quiz-data.json"
       );
+      // const fetched = await fetch(
+      //   "/all-quiz-data.json"
+      // );
       const data = await fetched.json();
       set({ allData: data });
       return data;
