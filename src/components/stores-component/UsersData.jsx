@@ -5,40 +5,46 @@ import { create } from "zustand";
 
 const useUserData = create((set) => ({
   userData: {},
+  userAccountData: {},
   loggedIn: false,
+  isLoading: false,
   setUserData: (data) => {
     set({ userData: data });
   },
   fetchUsersData: async (data, type) => {
-    console.log("sending");
     try {
-      // const response = await axios.get(`http://127.0.0.1:5000/login`);
-      const response = await axios.get(`https://max-quiz-app-backend.onrender.com/login`);
-      const user = response.data.find(({ email, password }) => {
-        if (type === "login") {
-          return data.email === email && data.password === password;
-        } else if (type === "register") {
-          return data.email === email;
-        }
-      });
-      console.log("sent");
-      if (user) {
-        set({ userData: user });
-        set({ loggedIn: true });
-        if (type==='login') {
-          return user
-        } else {
-          return true;
-        }
+      set({isLoading: true})
+      const response = await axios.post(`http://127.0.0.1:5000/${type}`, data);
+      if (response.data) {
+        set({ userData: response.data });
+        type === 'login' ? set({ loggedIn: true }) : set({ loggedIn: false });
+        return response
       } else {
         set({ loggedIn: false });
         set({ userData: {} });
-        return false;
+        return false
       }
     } catch (error) {
       toast.error(error);
       return false;
+    }finally{
+      set({isLoading: false})
     }
+  },
+  fetchUserAccountData: async (data)=>{
+    try {
+      // console.log(data, 'stta')
+      const response = await axios.post('http://127.0.0.1:5000/account_data', data)
+      console.log('fetching', response)
+      
+      set({userAccountData: response.data})
+      return response.data
+    } catch (error) {
+      console.log(error)
+    }
+  },
+  setUserAccountData:  (data)=>{
+    set({userAccountData: data})
   },
   logOut: ()=>{
         set({ loggedIn: false });

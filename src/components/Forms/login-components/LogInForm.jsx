@@ -3,9 +3,11 @@ import "../scss/form-fields.scss";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import useUserData from "../../stores-component/UsersData";
+// import { useState } from "react";
 
 function LoginForm() {
-  const { fetchUsersData } = useUserData();
+  const { fetchUsersData, isLoading, fetchUserAccountData } =
+    useUserData();
   const navigate = useNavigate();
   const {
     register,
@@ -19,11 +21,15 @@ function LoginForm() {
   // };
 
   const submitForm = async (data) => {
-    const user = await fetchUsersData(data, 'login');
-    // const { adminEmail, adminPassword } = admin;
-    if (user) {
-     navigate(`/${user.userId.trim().toLowerCase()}/dashboard`);
+    const user = await fetchUsersData(data, "login");
+    if (user.data) {
+      await fetchUserAccountData(user.data);
+      toast.success("Login Successful");
+      setTimeout(()=>{
+        navigate(`/${user.data.userId.trim().toLowerCase()}/dashboard`);
+      }, 3000)
     } else {
+      console.log(user);
       toast.error("Invalid Email or Password");
     }
   };
@@ -60,7 +66,7 @@ function LoginForm() {
         </label>
 
         <button type="submit" disabled={isSubmitting ? true : false}>
-          Log In
+          {!isLoading ? "Log In" : "Logging In..."}
         </button>
       </form>
 

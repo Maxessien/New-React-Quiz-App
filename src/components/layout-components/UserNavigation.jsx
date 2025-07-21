@@ -43,7 +43,9 @@ function UserNavigation() {
             </Link>
           </li>
           <li>
-            <Link to={`/${userData.userId.trim().toLowerCase()}/quiz`}>Quiz</Link>
+            <Link to={`/${userData.userId.trim().toLowerCase()}/quiz`}>
+              Quiz
+            </Link>
           </li>
           <li>
             <Link to={`/${userData.userId.trim().toLowerCase()}/profile`}>

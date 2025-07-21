@@ -49,7 +49,6 @@ function App() {
 
   return (
     <>
-      {console.log(loggedIn)}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -64,7 +63,6 @@ function App() {
           })}
           {loggedIn && (
             <>
-              {console.log(userData.name.trim(), "app")}
               <Route
                 path={`/${userData.userId.trim().toLowerCase()}/dashboard`}
                 element={<DashBoard />}

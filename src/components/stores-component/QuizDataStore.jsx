@@ -13,7 +13,6 @@ const useQuizData = create((set) => ({
       );
       const data = await fetched.json();
       set({ allData: data });
-      console.log("Data fetched successfully");
       return data;
     } catch (err) {
       err.message.toLowerCase().includes("failed to fetch")

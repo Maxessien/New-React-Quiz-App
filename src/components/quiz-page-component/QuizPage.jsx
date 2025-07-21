@@ -7,7 +7,7 @@ import { toast, ToastContainer } from "react-toastify";
 import useQuizData from "../stores-component/QuizDataStore";
 
 function QuizPage({ index }) {
-  const { allData} = useQuizData();
+  const { allData } = useQuizData();
   const [showQuestions, setShowQuestions] = useState(false);
   useEffect(() => {
     console.log("effect");
@@ -40,7 +40,7 @@ function QuizPage({ index }) {
   //     const data = await fetched.json();
   //     console.log(data)
   //     setAllData(data);
-      
+
   //   } catch (err) {
   //     err.message.toLowerCase().includes("failed to fetch")
   //       ? toast.error("Network error, please check your internet connection")
@@ -48,17 +48,19 @@ function QuizPage({ index }) {
   //   }
   // }
 
-  const startQuiz = ()=>{
+  const startQuiz = () => {
     setShowQuestions(true);
-  }
+  };
 
   async function submitQuiz() {
     try {
-      const fetchedAns = await fetch("https://raw.githubusercontent.com/Maxessien/Test-API-Fetch-/main/all-answers.json");
-      // const fetchedAns = await fetch("/answers.json");
+      // const fetchedAns = await fetch(
+      //   "https://raw.githubusercontent.com/Maxessien/Test-API-Fetch-/main/all-answers.json"
+      // );
+      const fetchedAns = await fetch("/all-answers.json");
       const answersData = await fetchedAns.json();
-      console.log(answersData);
       setCorrectAnswers(answersData[index].answers);
+      // setCorrectAnswers(answersData);
       setSubmitted(true);
     } catch (err) {
       err.message.toLowerCase().includes("failed to fetch")
@@ -69,23 +71,31 @@ function QuizPage({ index }) {
 
   return (
     <>
-      {submitted ? (
-        <Results answersData={correctAnswers} userAnswers={userAnswers} questionsIndex={index} />
+      {submitted && correctAnswers.length>0 ? (
+        <Results
+          answersData={correctAnswers}
+          userAnswers={userAnswers}
+          questionsIndex={index}
+          dataAtIndex={allData[index]}
+        />
       ) : (
         <>
           {!showQuestions ? (
-            <QuizIntro
-              startQuizProp={startQuiz}
-              questionsIndex={index}
-            />
+            <QuizIntro startQuizProp={startQuiz} questionsIndex={index} />
           ) : (
             <>
               <QuizHeader
                 submitFunction={submitQuiz}
-                quizLength={allData[index].questions.length ? allData[index].questions.length : 0}
+                quizLength={
+                  allData[index].questions.length
+                    ? allData[index].questions.length
+                    : 0
+                }
               />
               <QuizQuestions
-                data={allData[index].questions ? allData[index].questions : allData}
+                data={
+                  allData[index].questions ? allData[index].questions : allData
+                }
                 userAnswers={userAnswers}
                 submitFunction={submitQuiz}
               />

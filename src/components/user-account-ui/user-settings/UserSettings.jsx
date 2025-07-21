@@ -4,15 +4,25 @@ import "./scss/user-settings.scss";
 import useDarkMode from "../../stores-component/DarkLightThemeStore";
 import { useNavigate } from "react-router-dom";
 import useUserData from "../../stores-component/UsersData";
+import axios from "axios";
 
 function UserSettings() {
   const { isDarkMode, setIsDarkMode, selectedTheme } = useDarkMode();
-  const { userData, logOut } = useUserData();
+  const { userData, logOut, setUserAccountData } = useUserData();
   const navigate = useNavigate();
   const handleSelectedTheme = (e) => {
     const theme = e.target.value;
 
     setIsDarkMode(theme);
+  };
+
+  const handleAccountDataReset = async () => {
+    const res = await axios.post("http://127.0.0.1:5000/update_account_data", {
+      quizzesTaken: [],
+      userId: "21641dfa-65b7-4aaa-9fe9-418286555152",
+    });
+    console.log(res);
+    setUserAccountData(res.data)
   };
 
   const handleLogout = () => {
@@ -42,8 +52,8 @@ function UserSettings() {
               </span>
             </h2>
             <div className="account-info">
-              <p>Username: Max Essien</p>
-              <p>Email: max@gmail.com</p>
+              <p>Name: {userData.name}</p>
+              <p>Email: {userData.email}</p>
             </div>
             <button
               onClick={() => handleLogout()}
@@ -117,7 +127,10 @@ function UserSettings() {
               </label>
             </div>
             <div className="resets">
-              <button className="reset-progress">
+              <button
+                onClick={handleAccountDataReset}
+                className="reset-progress"
+              >
                 Reset Current Quiz Progress
               </button>
             </div>

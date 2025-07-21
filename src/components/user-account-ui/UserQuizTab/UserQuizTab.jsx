@@ -8,19 +8,22 @@ import AvailableQuizList from "../../layout-components/AvailableQuizList";
 // eslint-disable-next-line no-unused-vars
 import { AnimatePresence, motion } from "framer-motion";
 import useIsDarkMode from "../../stores-component/DarkLightThemeStore";
+import useUserData from "../../stores-component/UsersData";
 // import { useQuery } from "@tanstack/react-query";
 
 function UserQuizTab() {
   const { allData } = useQuizData();
   const { isDarkMode } = useIsDarkMode();
   const [filterMenu, setFilterMenu] = useState(false);
+  const { userAccountData } = useUserData();
+  const [attemptFilter, setAttemptFilter] = useState([]);
+  const [attemptFilterType, setAttemptFilterType] = useState();
   const courses = allData.map(({ course_code }) => {
     return course_code;
   });
 
   //setting the theme of this component dynamically
- 
-
+  console.log;
   const handleSelectedCourse = (state, action) => {
     if (action.type === "all") {
       return [...courses];
@@ -31,11 +34,42 @@ function UserQuizTab() {
     }
   };
 
+  const handleAttemptFilter = (type) => {
+    setAttemptFilterType(type);
+    if (type === "attempted") {
+      setAttemptFilter(
+        userAccountData.quizzesTaken.map((data) => {
+          return data.courseCode;
+        })
+      );
+    } else if (type === "not-attempted") {
+      console.log(type);
+      const attemptedArray = userAccountData.quizzesTaken.map((data) => {
+        return data.courseCode;
+      });
+      const allCourses = allData.map(({ course_code }) => {
+        return course_code;
+      });
+      setAttemptFilter(
+        allCourses.filter((course) => {
+          return !attemptedArray.includes(course);
+        })
+      );
+    } else {
+      setAttemptFilter(
+        allData.map(({ course_code }) => {
+          return course_code;
+        })
+      );
+    }
+  };
+
   //setting the selected categories to courses when it has been successfully fetched and preventing
   // infinite loop by making it run only when selected category is empty
   useEffect(() => {
     if (courses.length > 0 && selectedCategory.length < 1) {
       dispatch({ type: "all" });
+      handleAttemptFilter("all");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [courses]);
@@ -44,6 +78,7 @@ function UserQuizTab() {
 
   return (
     <UserAccountLayout>
+      {/* {console.log(attemptFilter)} */}
       <main>
         <section className="user-quiz-section">
           <header>
@@ -98,7 +133,6 @@ function UserQuizTab() {
                     <h3>By course</h3>
                     <ul className="all-courses">
                       {allData.map(({ course_code }, index) => {
-                        console.log(index, course_code);
                         return (
                           <li
                             style={{
@@ -127,16 +161,55 @@ function UserQuizTab() {
                       id="attempted"
                       name="completed-filter"
                     />
-                    <label htmlFor="attempted">Attempted</label>
+                    <label
+                      onClick={() => handleAttemptFilter("attempted")}
+                      htmlFor="attempted"
+                      style={{
+                        background:
+                          attemptFilterType === "attempted"
+                            ? isDarkMode
+                              ? "var(--blue-border)"
+                              : "rgba(106, 150, 156, 1)"
+                            : "none",
+                      }}
+                    >
+                      Attempted
+                    </label>
 
                     <input
                       type="radio"
                       id="not-attempted"
                       name="completed-filter"
                     />
-                    <label htmlFor="not-attempted">Not Attempted</label>
+                    <label
+                      onClick={() => handleAttemptFilter("not-attempted")}
+                      htmlFor="not-attempted"
+                      style={{
+                        background:
+                          attemptFilterType === "not-attempted"
+                            ? isDarkMode
+                              ? "var(--blue-border)"
+                              : "rgba(106, 150, 156, 1)"
+                            : "none",
+                      }}
+                    >
+                      Not Attempted
+                    </label>
                     <input type="radio" id="all" name="completed-filter" />
-                    <label htmlFor="all">All</label>
+                    <label
+                      onClick={() => handleAttemptFilter("all")}
+                      htmlFor="all"
+                      style={{
+                        background:
+                          attemptFilterType === "all"
+                            ? isDarkMode
+                              ? "var(--blue-border)"
+                              : "rgba(106, 150, 156, 1)"
+                            : "none",
+                      }}
+                    >
+                      All
+                    </label>
                   </div>
                 </motion.div>
               )}
@@ -150,7 +223,8 @@ function UserQuizTab() {
                   {allData.map(({ title, id, course_code }) => {
                     return (
                       <>
-                        {selectedCategory.includes(course_code) ? (
+                        {selectedCategory.includes(course_code) &&
+                        attemptFilter.includes(course_code) ? (
                           <Link style={{ width: "100%" }} to={`/quiz/${id}`}>
                             <li key={`${id}Item`} className="quiz-link">
                               {title}

@@ -33,12 +33,7 @@
       },
       {
         "question": "4. Which is a binary system?",
-        "options": [
-          "A. Base-2",
-          "B. Base-8",
-          "C. Base-10",
-          "D. Base-16"
-        ]
+        "options": ["A. Base-2", "B. Base-8", "C. Base-10", "D. Base-16"]
       },
       {
         "question": "5. An algorithm is a:",
@@ -60,12 +55,7 @@
       },
       {
         "question": "7. Which is NOT an operating system?",
-        "options": [
-          "A. Linux",
-          "B. Windows",
-          "C. Oracle",
-          "D. macOS"
-        ]
+        "options": ["A. Linux", "B. Windows", "C. Oracle", "D. macOS"]
       },
       {
         "question": "8. What is a motherboard?",
@@ -105,12 +95,7 @@
       },
       {
         "question": "12. Binary digits are called?",
-        "options": [
-          "A. Bits",
-          "B. Bytes",
-          "C. Nibbles",
-          "D. Words"
-        ]
+        "options": ["A. Bits", "B. Bytes", "C. Nibbles", "D. Words"]
       },
       {
         "question": "13. What is source code?",
@@ -148,138 +133,63 @@
     "questions": [
       {
         "question": "1. What is 5 + 7?",
-        "options": [
-          "A. 12",
-          "B. 13",
-          "C. 11",
-          "D. 10"
-        ]
+        "options": ["A. 12", "B. 13", "C. 11", "D. 10"]
       },
       {
         "question": "2. What is the derivative of x²?",
-        "options": [
-          "A. 2x",
-          "B. x",
-          "C. x²",
-          "D. 2"
-        ]
+        "options": ["A. 2x", "B. x", "C. x²", "D. 2"]
       },
       {
         "question": "3. What is the value of π (approx)?",
-        "options": [
-          "A. 3.14",
-          "B. 2.71",
-          "C. 1.62",
-          "D. 1.41"
-        ]
+        "options": ["A. 3.14", "B. 2.71", "C. 1.62", "D. 1.41"]
       },
       {
         "question": "4. What is 12 ÷ 4?",
-        "options": [
-          "A. 3",
-          "B. 2",
-          "C. 4",
-          "D. 5"
-        ]
+        "options": ["A. 3", "B. 2", "C. 4", "D. 5"]
       },
       {
         "question": "5. Integral of 1 dx is?",
-        "options": [
-          "A. x + C",
-          "B. 1 + C",
-          "C. 0",
-          "D. C"
-        ]
+        "options": ["A. x + C", "B. 1 + C", "C. 0", "D. C"]
       },
       {
         "question": "6. What is the slope of y = 3x + 5?",
-        "options": [
-          "A. 3",
-          "B. 5",
-          "C. 8",
-          "D. 0"
-        ]
+        "options": ["A. 3", "B. 5", "C. 8", "D. 0"]
       },
       {
         "question": "7. What is 0 factorial (0!)?",
-        "options": [
-          "A. 1",
-          "B. 0",
-          "C. Undefined",
-          "D. Infinity"
-        ]
+        "options": ["A. 1", "B. 0", "C. Undefined", "D. Infinity"]
       },
       {
         "question": "8. What is √49?",
-        "options": [
-          "A. 7",
-          "B. 6",
-          "C. 8",
-          "D. 9"
-        ]
+        "options": ["A. 7", "B. 6", "C. 8", "D. 9"]
       },
       {
         "question": "9. What is cos(0°)?",
-        "options": [
-          "A. 1",
-          "B. 0",
-          "C. -1",
-          "D. Undefined"
-        ]
+        "options": ["A. 1", "B. 0", "C. -1", "D. Undefined"]
       },
       {
         "question": "10. What is 2³?",
-        "options": [
-          "A. 8",
-          "B. 6",
-          "C. 9",
-          "D. 4"
-        ]
+        "options": ["A. 8", "B. 6", "C. 9", "D. 4"]
       },
       {
         "question": "11. What is the next prime after 5?",
-        "options": [
-          "A. 7",
-          "B. 6",
-          "C. 9",
-          "D. 11"
-        ]
+        "options": ["A. 7", "B. 6", "C. 9", "D. 11"]
       },
       {
         "question": "12. What is the sum of angles in a triangle?",
-        "options": [
-          "A. 180°",
-          "B. 360°",
-          "C. 90°",
-          "D. 270°"
-        ]
+        "options": ["A. 180°", "B. 360°", "C. 90°", "D. 270°"]
       },
       {
         "question": "13. What is the perimeter of a square with side 4?",
-        "options": [
-          "A. 16",
-          "B. 12",
-          "C. 8",
-          "D. 18"
-        ]
+        "options": ["A. 16", "B. 12", "C. 8", "D. 18"]
       },
       {
         "question": "14. What is the median of [1,2,3,4,5]?",
-        "options": [
-          "A. 3",
-          "B. 2",
-          "C. 4",
-          "D. 2.5"
-        ]
+        "options": ["A. 3", "B. 2", "C. 4", "D. 2.5"]
       },
       {
         "question": "15. What is 100% as a decimal?",
-        "options": [
-          "A. 1.0",
-          "B. 0.1",
-          "C. 10",
-          "D. 0.01"
-        ]
+        "options": ["A. 1.0", "B. 0.1", "C. 10", "D. 0.01"]
       }
     ]
   },
@@ -290,12 +200,7 @@
     "questions": [
       {
         "question": "1. Which is an example of OOP language?",
-        "options": [
-          "A. Java",
-          "B. C",
-          "C. Assembly",
-          "D. Bash"
-        ]
+        "options": ["A. Java", "B. C", "C. Assembly", "D. Bash"]
       },
       {
         "question": "2. What is a class in OOP?",
@@ -344,12 +249,7 @@
       },
       {
         "question": "7. Which keyword creates an instance in Java?",
-        "options": [
-          "A. new",
-          "B. init",
-          "C. create",
-          "D. inst"
-        ]
+        "options": ["A. new", "B. init", "C. create", "D. inst"]
       },
       {
         "question": "8. Method overriding is?",
@@ -380,21 +280,11 @@
       },
       {
         "question": "11. Which keyword refers to parent class in Java?",
-        "options": [
-          "A. super",
-          "B. parent",
-          "C. this",
-          "D. base"
-        ]
+        "options": ["A. super", "B. parent", "C. this", "D. base"]
       },
       {
         "question": "12. Descriptor for private in Java?",
-        "options": [
-          "A. private",
-          "B. public",
-          "C. protected",
-          "D. default"
-        ]
+        "options": ["A. private", "B. public", "C. protected", "D. default"]
       },
       {
         "question": "13. Interface contains?",
@@ -407,21 +297,11 @@
       },
       {
         "question": "14. Java is platform ___?",
-        "options": [
-          "A. Independent",
-          "B. Dependent",
-          "C. Neutral",
-          "D. None"
-        ]
+        "options": ["A. Independent", "B. Dependent", "C. Neutral", "D. None"]
       },
       {
         "question": "15. OOP promotes ___ reuse?",
-        "options": [
-          "A. Code",
-          "B. Memory",
-          "C. Hardware",
-          "D. Network"
-        ]
+        "options": ["A. Code", "B. Memory", "C. Hardware", "D. Network"]
       }
     ]
   },
@@ -441,12 +321,7 @@
       },
       {
         "question": "2. Which is linear DS?",
-        "options": [
-          "A. Array",
-          "B. Tree",
-          "C. Graph",
-          "D. Hash table"
-        ]
+        "options": ["A. Array", "B. Tree", "C. Graph", "D. Hash table"]
       },
       {
         "question": "3. LIFO stands for?",
@@ -459,12 +334,7 @@
       },
       {
         "question": "4. FIFO is used in?",
-        "options": [
-          "A. Queues",
-          "B. Stacks",
-          "C. Trees",
-          "D. Graphs"
-        ]
+        "options": ["A. Queues", "B. Stacks", "C. Trees", "D. Graphs"]
       },
       {
         "question": "5. Linked list nodes contain?",
@@ -477,12 +347,7 @@
       },
       {
         "question": "6. Binary tree node max children?",
-        "options": [
-          "A. 2",
-          "B. 3",
-          "C. 1",
-          "D. Any"
-        ]
+        "options": ["A. 2", "B. 3", "C. 1", "D. Any"]
       },
       {
         "question": "7. Hash table uses?",
@@ -513,12 +378,7 @@
       },
       {
         "question": "10. Queue enqueue adds to?",
-        "options": [
-          "A. Rear",
-          "B. Front",
-          "C. Middle",
-          "D. Either end"
-        ]
+        "options": ["A. Rear", "B. Front", "C. Middle", "D. Either end"]
       },
       {
         "question": "11. What is traversal?",
@@ -531,21 +391,11 @@
       },
       {
         "question": "12. Which is non-linear DS?",
-        "options": [
-          "A. Tree",
-          "B. Array",
-          "C. Stack",
-          "D. Queue"
-        ]
+        "options": ["A. Tree", "B. Array", "C. Stack", "D. Queue"]
       },
       {
         "question": "13. How many children in BST node?",
-        "options": [
-          "A. Max 2",
-          "B. Max 3",
-          "C. 1",
-          "D. None"
-        ]
+        "options": ["A. Max 2", "B. Max 3", "C. 1", "D. None"]
       },
       {
         "question": "14. DFS stands for?",
@@ -574,12 +424,7 @@
     "questions": [
       {
         "question": "1. Unit of force?",
-        "options": [
-          "A. Newton",
-          "B. Joule",
-          "C. Watt",
-          "D. Pascal"
-        ]
+        "options": ["A. Newton", "B. Joule", "C. Watt", "D. Pascal"]
       },
       {
         "question": "2. Speed of light is approx?",
@@ -592,84 +437,39 @@
       },
       {
         "question": "3. Acceleration unit?",
-        "options": [
-          "A. m/s²",
-          "B. m/s",
-          "C. m²/s",
-          "D. kg·m/s²"
-        ]
+        "options": ["A. m/s²", "B. m/s", "C. m²/s", "D. kg·m/s²"]
       },
       {
         "question": "4. Which is a vector?",
-        "options": [
-          "A. Velocity",
-          "B. Speed",
-          "C. Mass",
-          "D. Temperature"
-        ]
+        "options": ["A. Velocity", "B. Speed", "C. Mass", "D. Temperature"]
       },
       {
         "question": "5. Newton's 2nd law?",
-        "options": [
-          "A. F = ma",
-          "B. E = mc²",
-          "C. F = mv",
-          "D. V = at"
-        ]
+        "options": ["A. F = ma", "B. E = mc²", "C. F = mv", "D. V = at"]
       },
       {
         "question": "6. Work unit is?",
-        "options": [
-          "A. Joule",
-          "B. Newton",
-          "C. Pascal",
-          "D. Watt"
-        ]
+        "options": ["A. Joule", "B. Newton", "C. Pascal", "D. Watt"]
       },
       {
         "question": "7. What is 1 Pa?",
-        "options": [
-          "A. 1 N/m²",
-          "B. 1 J/m²",
-          "C. 1 W/m²",
-          "D. 1 N·m"
-        ]
+        "options": ["A. 1 N/m²", "B. 1 J/m²", "C. 1 W/m²", "D. 1 N·m"]
       },
       {
         "question": "8. Potential energy formula?",
-        "options": [
-          "A. mgh",
-          "B. ½mv²",
-          "C. F = ma",
-          "D. E = mc²"
-        ]
+        "options": ["A. mgh", "B. ½mv²", "C. F = ma", "D. E = mc²"]
       },
       {
         "question": "9. Kinetic energy formula?",
-        "options": [
-          "A. ½mv²",
-          "B. mgh",
-          "C. F = ma",
-          "D. P = VI"
-        ]
+        "options": ["A. ½mv²", "B. mgh", "C. F = ma", "D. P = VI"]
       },
       {
         "question": "10. Unit of pressure?",
-        "options": [
-          "A. Pascal",
-          "B. Newton",
-          "C. Joule",
-          "D. Watt"
-        ]
+        "options": ["A. Pascal", "B. Newton", "C. Joule", "D. Watt"]
       },
       {
         "question": "11. Mass unit is?",
-        "options": [
-          "A. Kilogram",
-          "B. Newton",
-          "C. Joule",
-          "D. Watt"
-        ]
+        "options": ["A. Kilogram", "B. Newton", "C. Joule", "D. Watt"]
       },
       {
         "question": "12. What phenomenon causes mirage?",
@@ -691,21 +491,11 @@
       },
       {
         "question": "14. Unit of energy?",
-        "options": [
-          "A. Joule",
-          "B. Newton",
-          "C. Watt",
-          "D. Pascal"
-        ]
+        "options": ["A. Joule", "B. Newton", "C. Watt", "D. Pascal"]
       },
       {
         "question": "15. Acceleration due to gravity g?",
-        "options": [
-          "A. 9.8 m/s²",
-          "B. 9.8 km/s",
-          "C. 9.8 m/s",
-          "D. 9.8 N"
-        ]
+        "options": ["A. 9.8 m/s²", "B. 9.8 km/s", "C. 9.8 m/s", "D. 9.8 N"]
       }
     ]
   },
@@ -734,21 +524,11 @@
       },
       {
         "question": "3. Ethics relates to?",
-        "options": [
-          "A. Morals",
-          "B. Numbers",
-          "C. Force",
-          "D. Energy"
-        ]
+        "options": ["A. Morals", "B. Numbers", "C. Force", "D. Energy"]
       },
       {
         "question": "4. Philosophy is study of?",
-        "options": [
-          "A. Existence",
-          "B. Forces",
-          "C. Chemicals",
-          "D. Equations"
-        ]
+        "options": ["A. Existence", "B. Forces", "C. Chemicals", "D. Equations"]
       },
       {
         "question": "5. Communication skill includes?",
@@ -815,12 +595,7 @@
       },
       {
         "question": "12. Respect is a ___ skill?",
-        "options": [
-          "A. Soft",
-          "B. Hard",
-          "C. Technical",
-          "D. Analytical"
-        ]
+        "options": ["A. Soft", "B. Hard", "C. Technical", "D. Analytical"]
       },
       {
         "question": "13. Problem-solving is part of?",
@@ -847,58 +622,6 @@
           "B. Calc numbers",
           "C. Code apps",
           "D. Measure force"
-        ]
-      }
-    ]
-  },
-  {
-    "id": "gns112_lecture1",
-    "course_code": "GNS 112",
-    "title": "GNS 112 Lecture 1 Quiz",
-    "questions": [
-      {
-        "question": "1. What is entrepreneurship?",
-        "options": [
-          "A. Starting a business",
-          "B. Studying math",
-          "C. Writing code",
-          "D. Teaching"
-        ]
-      },
-      {
-        "question": "2. Business model describes?",
-        "options": [
-          "A. How a company makes money",
-          "B. How it codes",
-          "C. How it travels",
-          "D. How it cooks"
-        ]
-      },
-      {
-        "question": "3. Marketing is about?",
-        "options": [
-          "A. Promoting a product",
-          "B. Writing tests",
-          "C. Running code",
-          "D. Analyzing circuits"
-        ]
-      },
-      {
-        "question": "4. Innovation means?",
-        "options": [
-          "A. New ideas",
-          "B. Old ideas",
-          "C. Copied ideas",
-          "D. Rejected ideas"
-        ]
-      },
-      {
-        "question": "5. Stakeholders are?",
-        "options": [
-          "A. Interested parties",
-          "B. Only investors",
-          "C. Only founders",
-          "D. Employees"
         ]
       }
     ]

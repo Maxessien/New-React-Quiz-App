@@ -1,12 +1,14 @@
 import { useForm } from "react-hook-form";
 import "../scss/form-fields.scss";
 import { toast, ToastContainer } from "react-toastify";
-import axios from "axios";
+// import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useUserData from "../../stores-component/UsersData";
+// import { useState } from "react";
+// import {useQuery} from "@tanstack/react-query"
 
 function RegisterForm() {
-  const {fetchUsersData} = useUserData()
+  const { fetchUsersData, isLoading } = useUserData();
   const {
     register,
     handleSubmit,
@@ -14,28 +16,24 @@ function RegisterForm() {
     formState: { errors, isSubmitting },
   } = useForm({ mode: "onTouched" });
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const submitForm = (data) => {
-    async function submitData() {
-      try {
-        const userExist = await fetchUsersData(data, 'register')
-        if (!userExist){
-          console.log(userExist)
-          // const response = await axios.post("http://127.0.0.1:5000/register", data);
-          const response = await axios.post("https://max-quiz-app-backend.onrender.com/register", data);
-          const result = response;
-          toast.success("Registration Successful");
-          navigate('/login')
-          console.log(result);
-        }else{
-          toast.error('User already exists')
-        }
-      } catch (error) {
-        console.error("Submission failed:", error);
+  const submitForm = async (data) => {
+    try {
+      const userExist = await fetchUsersData(data, "register");
+      if (!userExist.data) {
+        console.log(userExist);
+        toast.success("Registration Successful");
+        setTimeout(() => {
+          navigate("/login");
+        }, 3000);
+      } else {
+        toast.error("User already exists");
       }
+    } catch (err) {
+      console.log(err);
+      toast.error("Registration Failed, please try again later");
     }
-    submitData();
   };
   return (
     <>
@@ -120,7 +118,7 @@ function RegisterForm() {
         </label>
 
         <button type="submit" disabled={isSubmitting ? true : false}>
-          Sign Up
+          {!isLoading ? "Sign Up" : "Signing Up..."}
         </button>
       </form>
 

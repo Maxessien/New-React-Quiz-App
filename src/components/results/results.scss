@@ -1,4 +1,4 @@
-@use "functions_mixins" as *;
+@use "../../assets/functions_mixins" as *;
 
 .results-section {
   @include flex(stretch, center, rem(15), column);
@@ -40,5 +40,9 @@
   p {
     font-size: rem(21);
     font-weight: 600;
+  }
+  .return-to-dashboard{
+    @include button(rem(10) rem(15), rgb(0, 78, 0), null, rem(5), rgb(1, 119, 1));
+    color: rgb(226, 226, 226);
   }
 }
