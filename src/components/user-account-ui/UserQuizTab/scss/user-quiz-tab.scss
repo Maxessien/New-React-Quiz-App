@@ -3,12 +3,12 @@
 
 .user-quiz-section {
   padding: rem(20) rem(40);
-  @include media(medium){
-        padding: rem(20) rem(30);
-      }
-      @include media(small){
-        padding: rem(15) rem(20);
-      }
+  @include media(medium) {
+    padding: rem(20) rem(30);
+  }
+  @include media(small) {
+    padding: rem(15) rem(20);
+  }
   header {
     .filters {
       @include flex(center, space-between, rem(20));
@@ -61,41 +61,51 @@
       @include flex(flex-start, space-between, rem(20));
       z-index: 999;
       padding: rem(20);
-      @include media(large){
+      @include media(large) {
         flex-direction: column;
         justify-content: flex-start;
       }
-      @include media(medium){
+      @include media(medium) {
         padding: rem(20) rem(10);
       }
-      @include media(small){
+      @include media(small) {
         padding: rem(15) rem(5);
       }
       .category {
         .all-courses {
           @include grid(4, auto, rem(10));
-          @include media(small){
+          @include media(small) {
             grid-template-columns: repeat(3, 1fr);
             gap: rem(5);
           }
           li {
             margin-top: rem(10);
             padding: rem(5) rem(8);
-            border: 2px solid var(--blue-border);
             border-radius: rem(5);
             cursor: pointer;
             text-align: center;
+            transition: all 150ms linear;
+            box-shadow: 1.1px 1.4px 4px var(--fade-text-color);
+            &:active {
+              transform: scale(0.95);
+              box-shadow: 1px 1.3px 4px var(--fade-text-color);
+            }
             // @include me
           }
         }
-        button{
+        button {
           background: var(--light-bg);
-          color:  var(--text-color);
-          border: rem(2) solid var(--blue-border);
+          color: var(--text-color);
           padding: rem(5) rem(10);
           border-radius: rem(5);
           margin-top: rem(20);
           cursor: pointer;
+          transition: all 150ms linear;
+          box-shadow: 1.1px 1.4px 4px var(--fade-text-color);
+          &:active {
+            transform: scale(0.9);
+            box-shadow: 1px 1.2px 4px var(--fade-text-color);
+          }
         }
       }
     }
@@ -103,10 +113,14 @@
       @include flex(center, center, rem(15));
       label {
         cursor: pointer;
-        border: 2px solid var(--blue-border);
         padding: rem(5) rem(8);
-        border: 2px solid var(--blue-border);
         border-radius: rem(5);
+        transition: all 150ms linear;
+        box-shadow: 1.1px 1.4px 4px var(--fade-text-color);
+        &:active {
+          transform: scale(0.95);
+          box-shadow: 1px 1.2px 4px var(--fade-text-color);
+        }
       }
       input {
         display: none;

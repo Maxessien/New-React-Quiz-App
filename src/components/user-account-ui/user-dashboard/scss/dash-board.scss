@@ -16,10 +16,11 @@
       flex-direction: column;
     }
     .overview-card {
-      border: 2px solid var(--blue-border);
+      // border: 2px solid var(--blue-border);
       border-radius: rem(8);
       background: var(--light-bg);
       padding: rem(10) rem(15);
+      box-shadow: 1.2px 2px 4px var(--fade-text-color);
       @include media(medium) {
         width: 100%;
       }
@@ -34,6 +35,9 @@
   .progress {
     @include flex(flex-start, center, rem(20), column);
     width: 100%;
+    padding: rem(20) rem(20);
+    border-radius: rem(5);
+      box-shadow: 1.2px 2px 4px var(--fade-text-color);
     h3 {
       font-size: rem(25);
     }

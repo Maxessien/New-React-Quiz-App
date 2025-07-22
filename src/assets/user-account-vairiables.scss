@@ -7,6 +7,7 @@
   --fade-text-color: rgb(184, 184, 184);
   --blue-border: rgb(0, 79, 170);
   --nav-bg: rgb(0, 33, 36);
+  --shadow-spread: 2px;
 }
 
 :root[theme="light"] {
@@ -18,4 +19,5 @@
   --fade-text-color: rgb(90, 90, 90);
   --blue-border: rgb(0, 22, 49);
   --nav-bg: rgb(100, 124, 126);
+  --shadow-spread: 3px;
 }

@@ -22,14 +22,17 @@ function LoginForm() {
 
   const submitForm = async (data) => {
     const user = await fetchUsersData(data, "login");
-    if (user.data) {
-      await fetchUserAccountData(user.data);
+    console.log(user)
+    if (user) {
+      console.log(user, 'user')
+      const res = await fetchUserAccountData(user);
+      console.log(res, "res")
       toast.success("Login Successful");
       setTimeout(()=>{
-        navigate(`/${user.data.userId.trim().toLowerCase()}/dashboard`);
+        navigate(`/${user.userId.trim().toLowerCase()}/dashboard`);
       }, 3000)
     } else {
-      console.log(user);
+      console.log(user, 'fff');
       toast.error("Invalid Email or Password");
     }
   };

@@ -6,8 +6,7 @@ import { useRef } from "react";
 import useQuizData from "../../stores-component/QuizDataStore.jsx";
 
 function DashBoard() {
-  const { userAccountData, userData } = useUserData();
-  const { quizzesTaken } = userAccountData;
+  const { userAccountData, userData, quizzesTaken } = useUserData();
   const { allData } = useQuizData();
   const total = useRef(0);
   total.current = 0;
@@ -21,8 +20,8 @@ function DashBoard() {
   return (
     <UserAccountLayout>
       <main>
-        {console.log(userAccountData)}
-        {userAccountData.quizzesTaken && (
+        {console.log(quizzesTaken)}
+        {userAccountData && (
           <div className="user-dashboard">
             <h1>Dashboard</h1>
             <h2>Welcome back, {userData.name}!</h2>
@@ -30,34 +29,34 @@ function DashBoard() {
               <section className="overview-card">
                 <h3>Latest Quiz Score</h3>
                 <p>
-                  {quizzesTaken[0]
-                    ? `${quizzesTaken[quizzesTaken.length - 1].score}%`
+                  {userAccountData.length > 0
+                    ? `${userAccountData[userAccountData.length - 1].score}%`
                     : "-"}
                 </p>
               </section>
               <section className="overview-card">
                 <h3>Total Quizzes Taken</h3>
-                <p>{quizzesTaken[0] ? quizzesTaken.length : "-"}</p>
+                <p>{userAccountData.length > 0 ? userAccountData.length : "-"}</p>
               </section>
               <section className="overview-card">
                 <h3>Average Quiz Score</h3>
                 <p>
-                  {quizzesTaken[0] ? `${averageScore(quizzesTaken)}%` : "-"}
+                  {userAccountData.length > 0 ? `${averageScore(userAccountData)}%` : "-"}
                 </p>
               </section>
             </div>
 
             <section className="progress">
-              <h3>Quizzes Quiz Completed</h3>
+              <h3>Quizzes Completed</h3>
               <p>
-                {quizzesTaken[0]
+                {quizzesTaken.length > 0
                   ? `${quizzesTaken.length}/${allData.length}`
                   : `0/${allData.length}`}
               </p>
               <div className="progress-bar-wrapper">
                 <div className="progress-bar">
                   <CircularProgressbar
-                    value={quizzesTaken[0] ? quizzesTaken.length : 0}
+                    value={quizzesTaken.length > 0 ? quizzesTaken.length : 0}
                     maxValue={allData.length}
                     text={""}
                     circleRatio={1}
@@ -73,9 +72,9 @@ function DashBoard() {
                     })}
                   />
                   <span>
-                    {quizzesTaken[0]
+                    {userAccountData[0]
                       ? `${parseInt(
-                          (quizzesTaken.length / allData.length) * 100
+                          (userAccountData.length / allData.length) * 100
                         )}%`
                       : "0%"}
                   </span>

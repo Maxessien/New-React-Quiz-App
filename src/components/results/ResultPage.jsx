@@ -1,13 +1,14 @@
 import "./results.scss";
-import useQuizData from "./../stores-component/QuizDataStore";
+// import useQuizData from "./../stores-component/QuizDataStore";
 import useUserData from "../stores-component/UsersData";
 import { useEffect, useRef } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-function Results({ answersData, userAnswers, questionsIndex, dataAtIndex }) {
-  const { loggedIn, userAccountData, userData } = useUserData();
-  const { allData } = useQuizData();
+function Results({ answersData, userAnswers, dataAtIndex }) {
+  const { loggedIn, userAccountData, userData, quizzesTaken } = useUserData();
+  // const { allData } = useQuizData();
+  const { course_code, questions } = dataAtIndex;
   const hasRun = useRef(false)
   let total = 0;
   for (let i = 0; i < answersData.length; i++) {
@@ -18,25 +19,27 @@ function Results({ answersData, userAnswers, questionsIndex, dataAtIndex }) {
   useEffect(() => {
     if (loggedIn && !hasRun.current) {
       hasRun.current=true
-      const { id, course_code, title } = dataAtIndex;
       const date = new Date()
       const newAccountData = {
-        timeStamp: date.toString(),
-        quizId: id,
-        courseCode: course_code,
-        quizTitle: title,
+        user_id: userData.userId,
+        course_code: course_code,
         score: ((total / answersData.length) * 100).toFixed(2),
+        quiz_data: questions,
+        selected_answers: userAnswers,
+        correct_answers: answersData,
+        time_stamp: date.toString(),
       };
       console.log(newAccountData.score, 'new')
-      userAccountData.quizzesTaken.push(newAccountData);
+      userAccountData.push(newAccountData);
+      quizzesTaken.push(course_code)
       const updateBackend = async () => {
         // const res = await axios.post(
-        //   "http://127.0.0.1:5000/update_account_data",
-        //   userAccountData
+        //   "http://127.0.0.1:5000/update_results_db",
+        //   newAccountData
         // );
         const res = await axios.post(
           "https://max-quiz-app-backend.onrender.com/update_account_data",
-          userAccountData
+          newAccountData
         );
         console.log(res);
       };
@@ -57,7 +60,7 @@ function Results({ answersData, userAnswers, questionsIndex, dataAtIndex }) {
                 <span>{`${index + 1}.) `}</span>
                 <span>
                   <span style={{ marginRight: `${15 / 16}rem` }}>
-                    {allData[questionsIndex].questions[index].question.slice(3)}
+                    {questions[index].question.slice(3)}
                   </span>
                   Correct ✅ - {userAnswers.current[index]}
                 </span>
@@ -67,7 +70,7 @@ function Results({ answersData, userAnswers, questionsIndex, dataAtIndex }) {
                 <span>{`${index + 1}.) `}</span>
                 <span>
                   <span style={{ marginRight: `${15 / 16}rem` }}>
-                    {allData[questionsIndex].questions[index].question.slice(3)}
+                    {questions[index].question.slice(3)}
                   </span>
                   Wrong ❌ - {userAnswers.current[index]} (Correct Answer -{" "}
                   {answer})

@@ -20,9 +20,9 @@ function RegisterForm() {
 
   const submitForm = async (data) => {
     try {
-      const userExist = await fetchUsersData(data, "register");
-      if (!userExist.data) {
-        console.log(userExist);
+      const response = await fetchUsersData(data, "register");
+      if (response.success) {
+        console.log(response);
         toast.success("Registration Successful");
         setTimeout(() => {
           navigate("/login");

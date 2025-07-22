@@ -15,7 +15,7 @@ function UserQuizTab() {
   const { allData } = useQuizData();
   const { isDarkMode } = useIsDarkMode();
   const [filterMenu, setFilterMenu] = useState(false);
-  const { userAccountData } = useUserData();
+  const { quizzesTaken } = useUserData();
   const [attemptFilter, setAttemptFilter] = useState([]);
   const [attemptFilterType, setAttemptFilterType] = useState();
   const courses = allData.map(({ course_code }) => {
@@ -37,22 +37,15 @@ function UserQuizTab() {
   const handleAttemptFilter = (type) => {
     setAttemptFilterType(type);
     if (type === "attempted") {
-      setAttemptFilter(
-        userAccountData.quizzesTaken.map((data) => {
-          return data.courseCode;
-        })
-      );
+      setAttemptFilter(quizzesTaken);
     } else if (type === "not-attempted") {
       console.log(type);
-      const attemptedArray = userAccountData.quizzesTaken.map((data) => {
-        return data.courseCode;
-      });
       const allCourses = allData.map(({ course_code }) => {
         return course_code;
       });
       setAttemptFilter(
         allCourses.filter((course) => {
-          return !attemptedArray.includes(course);
+          return !quizzesTaken.includes(course);
         })
       );
     } else {
@@ -226,7 +219,15 @@ function UserQuizTab() {
                         {selectedCategory.includes(course_code) &&
                         attemptFilter.includes(course_code) ? (
                           <Link style={{ width: "100%" }} to={`/quiz/${id}`}>
-                            <li key={`${id}Item`} className="quiz-link">
+                            <li
+                              // style={{
+                              //   boxShadow: !isDarkMode
+                              //     ? ""
+                              //     : null,
+                              // }}
+                              key={`${id}Item`}
+                              className="quiz-link"
+                            >
                               {title}
                             </li>
                           </Link>

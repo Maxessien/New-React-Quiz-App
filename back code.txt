@@ -1,0 +1,588 @@
+login form jsx
+import { useForm } from "react-hook-form";
+import "../scss/form-fields.scss";
+import { toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import useUserData from "../../stores-component/UsersData";
+// import { useState } from "react";
+
+function LoginForm() {
+  const { fetchUsersData, isLoading, fetchUserAccountData } =
+    useUserData();
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({ mode: "onTouched" });
+
+  // const admin = {
+  //   adminEmail: "admin@gmail.com",
+  //   adminPassword: "maxadmin12354",
+  // };
+
+  const submitForm = async (data) => {
+    const user = await fetchUsersData(data, "login");
+    console.log(user)
+    if (user) {
+      console.log(user, 'user')
+      const res = await fetchUserAccountData(user);
+      console.log(res, "res")
+      toast.success("Login Successful");
+      setTimeout(()=>{
+        navigate(`/${user.userId.trim().toLowerCase()}/dashboard`);
+      }, 3000)
+    } else {
+      console.log(user, 'fff');
+      toast.error("Invalid Email or Password");
+    }
+  };
+  return (
+    <>
+      <form onSubmit={handleSubmit(submitForm)} className="user-form">
+        <label htmlFor="email">
+          Email
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+            {...register("email", {
+              required: "Email is required",
+            })}
+          />
+          {errors.email && (
+            <p className="error-message">{errors.email.message}</p>
+          )}
+        </label>
+        <label htmlFor="password">
+          Password
+          <input
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+            {...register("password", {
+              required: "Password is required",
+            })}
+          />
+          {errors.password && (
+            <p className="error-message">{errors.password.message}</p>
+          )}
+        </label>
+
+        <button type="submit" disabled={isSubmitting ? true : false}>
+          {!isLoading ? "Log In" : "Logging In..."}
+        </button>
+      </form>
+
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        newestOnTop={true}
+        hideProgressBar={false}
+        closeOnClick={true}
+      />
+    </>
+  );
+}
+
+export default LoginForm;
+
+
+register form jsx
+import { useForm } from "react-hook-form";
+import "../scss/form-fields.scss";
+import { toast, ToastContainer } from "react-toastify";
+// import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import useUserData from "../../stores-component/UsersData";
+// import { useState } from "react";
+// import {useQuery} from "@tanstack/react-query"
+
+function RegisterForm() {
+  const { fetchUsersData, isLoading } = useUserData();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors, isSubmitting },
+  } = useForm({ mode: "onTouched" });
+
+  const navigate = useNavigate();
+
+  const submitForm = async (data) => {
+    try {
+      const response = await fetchUsersData(data, "register");
+      if (response.success) {
+        console.log(response);
+        toast.success("Registration Successful");
+        setTimeout(() => {
+          navigate("/login");
+        }, 3000);
+      } else {
+        toast.error("User already exists");
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error("Registration Failed, please try again later");
+    }
+  };
+  return (
+    <>
+      <form
+        method="POST"
+        onSubmit={handleSubmit(submitForm)}
+        className="user-form"
+      >
+        <label htmlFor="name">
+          Name
+          <input
+            type="text"
+            id="name"
+            placeholder="Enter your name"
+            {...register("name", {
+              required: "Name is required",
+              minLength: {
+                value: 3,
+                message: "Name must be at least 3 characters long",
+              },
+            })}
+          />
+          {errors.name && (
+            <p className="error-message">{errors.name.message}</p>
+          )}
+        </label>
+        <label htmlFor="email">
+          Email{" "}
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                message: "Invalid email address",
+              },
+            })}
+          />
+          {errors.email && (
+            <p className="error-message">{errors.email.message}</p>
+          )}
+        </label>
+        <label htmlFor="password">
+          Password
+          <input
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+            {...register("password", {
+              required: "Password is required",
+              minLength: {
+                value: 8,
+                message: "Password must be at least 8 characters long",
+              },
+              pattern: {
+                value: /^(?=.*[A-Za-z])(?=.*\d).+$/,
+                message: "Password must contain a letter and anumber",
+              },
+            })}
+          />
+          {errors.password && (
+            <p className="error-message">{errors.password.message}</p>
+          )}
+        </label>
+        <label htmlFor="confirm-password">
+          Confirm password
+          <input
+            type="password"
+            id="confirm-password"
+            placeholder="Confirm password"
+            {...register("confirmPassword", {
+              required: "Confirm Password",
+              validate: (value) =>
+                value === watch("password") || "Passwords must  match",
+            })}
+          />
+          {errors.confirmPassword && (
+            <p className="error-message">{errors.confirmPassword.message}</p>
+          )}
+        </label>
+
+        <button type="submit" disabled={isSubmitting ? true : false}>
+          {!isLoading ? "Sign Up" : "Signing Up..."}
+        </button>
+      </form>
+
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        newestOnTop={true}
+        hideProgressBar={false}
+        closeOnClick={true}
+      />
+    </>
+  );
+}
+
+export default RegisterForm;
+
+
+user quiz tab jsx
+import { FaFilter, FaSearch } from "react-icons/fa";
+import UserAccountLayout from "../../layout-components/UserAccountLayout";
+import { useState, useReducer, useEffect } from "react";
+import "./scss/user-quiz-tab.scss";
+import useQuizData from "../../stores-component/QuizDataStore";
+import { Link } from "react-router-dom";
+import AvailableQuizList from "../../layout-components/AvailableQuizList";
+// eslint-disable-next-line no-unused-vars
+import { AnimatePresence, motion } from "framer-motion";
+import useIsDarkMode from "../../stores-component/DarkLightThemeStore";
+import useUserData from "../../stores-component/UsersData";
+// import { useQuery } from "@tanstack/react-query";
+
+function UserQuizTab() {
+  const { allData } = useQuizData();
+  const { isDarkMode } = useIsDarkMode();
+  const [filterMenu, setFilterMenu] = useState(false);
+  const { quizzesTaken } = useUserData();
+  const [attemptFilter, setAttemptFilter] = useState([]);
+  const [attemptFilterType, setAttemptFilterType] = useState();
+  const courses = allData.map(({ course_code }) => {
+    return course_code;
+  });
+
+  //setting the theme of this component dynamically
+  console.log;
+  const handleSelectedCourse = (state, action) => {
+    if (action.type === "all") {
+      return [...courses];
+    } else if (!state.includes(action.type)) {
+      return [...state, action.type];
+    } else {
+      return state.filter((st) => st !== action.type);
+    }
+  };
+
+  const handleAttemptFilter = (type) => {
+    setAttemptFilterType(type);
+    if (type === "attempted") {
+      setAttemptFilter(quizzesTaken);
+    } else if (type === "not-attempted") {
+      console.log(type);
+      const allCourses = allData.map(({ course_code }) => {
+        return course_code;
+      });
+      setAttemptFilter(
+        allCourses.filter((course) => {
+          return !quizzesTaken.includes(course);
+        })
+      );
+    } else {
+      setAttemptFilter(
+        allData.map(({ course_code }) => {
+          return course_code;
+        })
+      );
+    }
+  };
+
+  //setting the selected categories to courses when it has been successfully fetched and preventing
+  // infinite loop by making it run only when selected category is empty
+  useEffect(() => {
+    if (courses.length > 0 && selectedCategory.length < 1) {
+      dispatch({ type: "all" });
+      handleAttemptFilter("all");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [courses]);
+
+  const [selectedCategory, dispatch] = useReducer(handleSelectedCourse, []);
+
+  return (
+    <UserAccountLayout>
+      {/* {console.log(attemptFilter)} */}
+      <main>
+        <section className="user-quiz-section">
+          <header>
+            <h1>QUIZ</h1>
+            <div className="filters">
+              <form>
+                <label htmlFor="search" className="search-bar">
+                  <input type="text" id="search" placeholder="CSC 102" />
+                  <button type="submit">
+                    <FaSearch size={20} />
+                  </button>
+                </label>
+              </form>
+
+              <button
+                className="filter-btn"
+                style={{
+                  background: filterMenu
+                    ? isDarkMode
+                      ? "var(--blue-border)"
+                      : "rgba(106, 150, 156, 1)"
+                    : "none",
+                }}
+                onClick={() => setFilterMenu(!filterMenu)}
+              >
+                <FaFilter /> Filter
+              </button>
+            </div>
+
+            <AnimatePresence mode="wait">
+              {filterMenu && (
+                <motion.div
+                  variants={{
+                    hidden: {
+                      scaleY: 0,
+                      transformOrigin: "top",
+                    },
+                    visible: {
+                      scaleY: 1,
+                      transformOrigin: "top",
+                    },
+                  }}
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
+                  transition={{
+                    duration: 0.5,
+                  }}
+                  className="filter-wrapper"
+                >
+                  <div className="category">
+                    <h3>By course</h3>
+                    <ul className="all-courses">
+                      {allData.map(({ course_code }, index) => {
+                        return (
+                          <li
+                            style={{
+                              background: selectedCategory.includes(course_code)
+                                ? isDarkMode
+                                  ? "var(--blue-border)"
+                                  : "rgba(106, 150, 156, 1)"
+                                : "none",
+                            }}
+                            key={index}
+                            onClick={() => dispatch({ type: course_code })}
+                          >
+                            {course_code}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                    <button onClick={() => dispatch({ type: "all" })}>
+                      Reset
+                    </button>
+                  </div>
+
+                  <div className="completed-quiz-filter">
+                    <input
+                      type="radio"
+                      id="attempted"
+                      name="completed-filter"
+                    />
+                    <label
+                      onClick={() => handleAttemptFilter("attempted")}
+                      htmlFor="attempted"
+                      style={{
+                        background:
+                          attemptFilterType === "attempted"
+                            ? isDarkMode
+                              ? "var(--blue-border)"
+                              : "rgba(106, 150, 156, 1)"
+                            : "none",
+                      }}
+                    >
+                      Attempted
+                    </label>
+
+                    <input
+                      type="radio"
+                      id="not-attempted"
+                      name="completed-filter"
+                    />
+                    <label
+                      onClick={() => handleAttemptFilter("not-attempted")}
+                      htmlFor="not-attempted"
+                      style={{
+                        background:
+                          attemptFilterType === "not-attempted"
+                            ? isDarkMode
+                              ? "var(--blue-border)"
+                              : "rgba(106, 150, 156, 1)"
+                            : "none",
+                      }}
+                    >
+                      Not Attempted
+                    </label>
+                    <input type="radio" id="all" name="completed-filter" />
+                    <label
+                      onClick={() => handleAttemptFilter("all")}
+                      htmlFor="all"
+                      style={{
+                        background:
+                          attemptFilterType === "all"
+                            ? isDarkMode
+                              ? "var(--blue-border)"
+                              : "rgba(106, 150, 156, 1)"
+                            : "none",
+                      }}
+                    >
+                      All
+                    </label>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </header>
+
+          {selectedCategory.length > 0 && (
+            <>
+              <section>
+                <ul className="available-quiz-list">
+                  {allData.map(({ title, id, course_code }) => {
+                    return (
+                      <>
+                        {selectedCategory.includes(course_code) &&
+                        attemptFilter.includes(course_code) ? (
+                          <Link style={{ width: "100%" }} to={`/quiz/${id}`}>
+                            <li
+                              // style={{
+                              //   boxShadow: !isDarkMode
+                              //     ? ""
+                              //     : null,
+                              // }}
+                              key={`${id}Item`}
+                              className="quiz-link"
+                            >
+                              {title}
+                            </li>
+                          </Link>
+                        ) : null}
+                      </>
+                    );
+                  })}
+                </ul>
+              </section>
+            </>
+          )}
+        </section>
+      </main>
+    </UserAccountLayout>
+  );
+}
+
+export default UserQuizTab;
+
+
+
+result page jsx
+import "./results.scss";
+// import useQuizData from "./../stores-component/QuizDataStore";
+import useUserData from "../stores-component/UsersData";
+import { useEffect, useRef } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+
+function Results({ answersData, userAnswers, dataAtIndex }) {
+  const { loggedIn, userAccountData, userData, quizzesTaken } = useUserData();
+  // const { allData } = useQuizData();
+  const { course_code, questions } = dataAtIndex;
+  const hasRun = useRef(false)
+  let total = 0;
+  for (let i = 0; i < answersData.length; i++) {
+    if (userAnswers.current[i] === answersData[i]) {
+      total++;
+    }
+  }
+  useEffect(() => {
+    if (loggedIn && !hasRun.current) {
+      hasRun.current=true
+      const date = new Date()
+      const newAccountData = {
+        user_id: userData.userId,
+        course_code: course_code,
+        score: ((total / answersData.length) * 100).toFixed(2),
+        quiz_data: questions,
+        selected_answers: userAnswers,
+        correct_answers: answersData,
+        time_stamp: date.toString(),
+      };
+      console.log(newAccountData.score, 'new')
+      userAccountData.push(newAccountData);
+      quizzesTaken.push(course_code)
+      const updateBackend = async () => {
+        const res = await axios.post(
+          "http://127.0.0.1:5000/update_results_db",
+          newAccountData
+        );
+        // const res = await axios.post(
+        //   "https://max-quiz-app-backend.onrender.com/update_account_data",
+        //   newAccountData
+        // );
+        console.log(res);
+      };
+      updateBackend();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loggedIn]);
+  return (
+    <>
+      <section className="results-section">
+        <h1>Results</h1>
+
+        <ul>
+          {answersData.map((answer, index) => {
+            return answer === userAnswers.current[index] ? (
+              <li key={`score-${index + 1}`}>
+                {console.log("li top")}
+                <span>{`${index + 1}.) `}</span>
+                <span>
+                  <span style={{ marginRight: `${15 / 16}rem` }}>
+                    {questions[index].question.slice(3)}
+                  </span>
+                  Correct ✅ - {userAnswers.current[index]}
+                </span>
+              </li>
+            ) : (
+              <li key={`score-${index + 1}`}>
+                <span>{`${index + 1}.) `}</span>
+                <span>
+                  <span style={{ marginRight: `${15 / 16}rem` }}>
+                    {questions[index].question.slice(3)}
+                  </span>
+                  Wrong ❌ - {userAnswers.current[index]} (Correct Answer -{" "}
+                  {answer})
+                </span>
+              </li>
+            );
+          })}
+        </ul>
+
+        <p>
+          Total: {total}/{answersData.length}
+        </p>
+        <p>Score: {((total / answersData.length) * 100).toFixed(2)}%</p>
+        {loggedIn ?
+        (<Link to={`/${userData.userId.trim().toLowerCase()}/dashboard`}>
+        <button className="return-to-dashboard">
+          Return To Dashboard
+        </button>
+        </Link>) : (
+          <Link to={`/`}>
+        <button className="return-to-dashboard">
+          Return To Home
+        </button>
+        </Link>
+        )
+        }
+      </section>
+    </>
+  );
+}
+
+export default Results;
+

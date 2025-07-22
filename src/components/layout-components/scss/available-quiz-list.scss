@@ -20,6 +20,7 @@
     color: var(--text-color);
     border-radius: rem(5);
     transition: all 100ms linear;
+    box-shadow: inset 0px 0px 7px var(--shadow-spread) var(--text-color);
     cursor: pointer;
     @include media(small) {
       font-size: rem(19);

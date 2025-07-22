@@ -54,10 +54,10 @@ function QuizPage({ index }) {
 
   async function submitQuiz() {
     try {
-      // const fetchedAns = await fetch(
-      //   "https://raw.githubusercontent.com/Maxessien/Test-API-Fetch-/main/all-answers.json"
-      // );
-      const fetchedAns = await fetch("/all-answers.json");
+      const fetchedAns = await fetch(
+        "https://raw.githubusercontent.com/Maxessien/Test-API-Fetch-/main/all-answers.json"
+      );
+      // const fetchedAns = await fetch("/all-answers.json");
       const answersData = await fetchedAns.json();
       setCorrectAnswers(answersData[index].answers);
       // setCorrectAnswers(answersData);
