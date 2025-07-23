@@ -5,9 +5,10 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import useUserData from "../../stores-component/UsersData";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
 
 function UserProfile() {
-  const { userData, setUserData } = useUserData();
+  const { userData, setUserState } = useUserData();
   const [showPassword, setShowPassword] = useState(false);
   const [editForm, setEditForm] = useState(true);
   const {
@@ -20,11 +21,17 @@ function UserProfile() {
     defaultValues: userData,
   });
   const handleSave = async (data) => {
-    // await axios.post("http://127.0.0.1:5000/update", {...data, userId: userData.userId})
-    await axios.post("https://max-quiz-app-backend.onrender.com/update", {...data, userId: userData.userId})
-    setUserData(data);
-    setEditForm(true);
-    setShowPassword(false);
+    try {
+      // await axios.post("http://127.0.0.1:5000/update", {...data, userId: userData.userId})
+      await axios.post("https://max-quiz-app-backend.onrender.com/update", {...data, userId: userData.userId})
+      setUserState("userData", {...data, userId: userData.userId})
+      setEditForm(true);
+      setShowPassword(false);
+      toast.success("Account successfully updated")
+    } catch (error) {
+      toast.error("There was an error, please try again later")
+      console.log(error)
+    }
   };
 
   const handleCancel = () => {
@@ -147,6 +154,13 @@ function UserProfile() {
             </div>
           </form>
         </section>
+        <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        newestOnTop={true}
+        pauseOnHover={true}
+        theme="colored"
+        />
       </UserAccountLayout>
     </>
   );

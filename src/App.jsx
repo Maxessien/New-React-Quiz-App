@@ -1,7 +1,7 @@
 import HomePage from "./components/home-components/Home";
 import QuizPage from "./components/quiz-page-component/QuizPage";
 import Register from "./components/Forms/register-component/Register";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import "./index.css";
 import Login from "./components/Forms/login-components/LogInPage";
 import SuccessPage from "./components/all-quiz-components/SuccessPage";
@@ -19,19 +19,43 @@ import UserSettings from "./components/user-account-ui/user-settings/UserSetting
 import useDarkMode from "./components/stores-component/DarkLightThemeStore";
 import UserProfile from "./components/user-account-ui/UserProfile/UserProfile";
 import useUserData from "./components/stores-component/UsersData";
+import axios from "axios";
 // import AvailableQuizzes from "./components/available-quizzes/AvailableQuizzes";
 
 function App() {
   const { fetchData, allData } = useQuizData();
   const { mobileView, setMobileView } = useMobileView();
   const { setIsDarkMode } = useDarkMode();
-  const { userData, loggedIn } = useUserData();
+  const { userData, loggedIn, setUserState, fetchUserAccountData } = useUserData();
+  const navigate = useNavigate()
   useQuery({
     queryKey: ["quizData"],
     queryFn: fetchData,
     refetchOnReconnect: true,
   });
   useEffect(() => {
+    const session = JSON.parse(localStorage.getItem("session"));
+    console.log(session)
+    const loginSessionedUser = async (token) => {
+      if (token){
+        try {
+          // const response = await axios.get(
+          //   `http://127.0.0.1:5000/login_with_token/${token}`
+          // );
+          const response = await axios.get(`https://max-quiz-app-backend.onrender.com/login_with_token/${token}`);
+          setUserState("userData", response.data)
+          await fetchUserAccountData(response.data)
+          setUserState("loggedIn", true)
+        } catch (error) {
+          localStorage.clear()
+          navigate("/login")
+          console.log(error)
+        }
+      }else{
+        return
+      }
+    };
+    loginSessionedUser(session)
     const mobileCheck = () => {
       console.log(mobileView, "app");
       if (window.innerWidth < 768) {
@@ -49,7 +73,6 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<Register />} />
@@ -82,7 +105,6 @@ function App() {
             </>
           )}
         </Routes>
-      </BrowserRouter>
     </>
   );
 }

@@ -33,21 +33,6 @@ function QuizPage({ index }) {
 
   const userAnswers = useRef([]);
 
-  // async function fetchQuestions() {
-  //   try {
-  //     const fetched = await fetch("https://raw.githubusercontent.com/Maxessien/Test-API-Fetch-/main/all-quiz-data.json");
-  //     // const fetched = await fetch("/questions.json");
-  //     const data = await fetched.json();
-  //     console.log(data)
-  //     setAllData(data);
-
-  //   } catch (err) {
-  //     err.message.toLowerCase().includes("failed to fetch")
-  //       ? toast.error("Network error, please check your internet connection")
-  //       : toast.error("Server Error, please try again later");
-  //   }
-  // }
-
   const startQuiz = () => {
     setShowQuestions(true);
   };

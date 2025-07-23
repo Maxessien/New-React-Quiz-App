@@ -6,7 +6,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 function Results({ answersData, userAnswers, dataAtIndex }) {
-  const { loggedIn, userAccountData, userData, quizzesTaken } = useUserData();
+  const { loggedIn, userAccountData, userData, quizzesTaken, setUserState } = useUserData();
   // const { allData } = useQuizData();
   const { course_code, questions } = dataAtIndex;
   const hasRun = useRef(false)
@@ -30,18 +30,23 @@ function Results({ answersData, userAnswers, dataAtIndex }) {
         time_stamp: date.toString(),
       };
       console.log(newAccountData.score, 'new')
-      userAccountData.push(newAccountData);
-      quizzesTaken.push(course_code)
       const updateBackend = async () => {
-        // const res = await axios.post(
-        //   "http://127.0.0.1:5000/update_results_db",
-        //   newAccountData
+        try {
+          // const res = await axios.post(
+          //     "http://127.0.0.1:5000/update_results_db",
+          //     newAccountData
+          //)
+            const res = await axios.post(
+              "https://max-quiz-app-backend.onrender.com/update_results_db",
+              newAccountData
+            );
+            console.log(res);
+          setUserState("userAccountData", [...userAccountData, newAccountData])
+          setUserState("quizzesTaken", [...quizzesTaken, course_code])
+        } catch (error) {
+          console.lod(error)
+        }
         // );
-        const res = await axios.post(
-          "https://max-quiz-app-backend.onrender.com/update_account_data",
-          newAccountData
-        );
-        console.log(res);
       };
       updateBackend();
     }

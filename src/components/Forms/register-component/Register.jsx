@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 import { useEffect } from "react";
 import "../scss/form-page.scss";
 import RegisterForm from "./RegisterForm";

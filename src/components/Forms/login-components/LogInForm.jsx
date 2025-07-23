@@ -21,19 +21,27 @@ function LoginForm() {
   // };
 
   const submitForm = async (data) => {
-    const user = await fetchUsersData(data, "login");
-    console.log(user)
-    if (user) {
-      console.log(user, 'user')
-      const res = await fetchUserAccountData(user);
-      console.log(res, "res")
-      toast.success("Login Successful");
-      setTimeout(()=>{
-        navigate(`/${user.userId.trim().toLowerCase()}/dashboard`);
-      }, 3000)
-    } else {
-      console.log(user, 'fff');
-      toast.error("Invalid Email or Password");
+    try {
+      const user = await fetchUsersData(data, "login");
+      console.log(user)
+      if (user) {
+        console.log(user, 'user')
+        localStorage.setItem("session", JSON.stringify(user.sessionToken))
+        const res = await fetchUserAccountData(user);
+        console.log(res, "res")
+        if (res){
+          toast.success("Login Successful");
+          setTimeout(()=>{
+            navigate(`/${user.userId.trim().toLowerCase()}/dashboard`);
+          }, 3000)
+        }
+      } else {
+        console.log(user, 'fff');
+        toast.error("Invalid Email or Password");
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error("There was an error, please try again later")
     }
   };
   return (

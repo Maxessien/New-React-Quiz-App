@@ -5,19 +5,19 @@ import { create } from "zustand";
 
 const useUserData = create((set) => ({
   userData: {},
-  userAccountData: {},
+  userAccountData: [],
   loggedIn: false,
   isLoading: false,
   quizzesTaken: [],
-  setUserData: (data) => {
-    set({ userData: data });
-  },
   fetchUsersData: async (data, type) => {
     console.log("inside");
     try {
       set({ isLoading: true });
       // const response = await axios.post(`http://127.0.0.1:5000/${type}`, data);
-      const response = await axios.post(`https://max-quiz-app-backend.onrender.com/${type}`, data);
+      const response = await axios.post(
+        `https://max-quiz-app-backend.onrender.com/${type}`,
+        data
+      );
       if (response.data) {
         set({ userData: response.data });
         type === "login" ? set({ loggedIn: true }) : set({ loggedIn: false });
@@ -30,8 +30,9 @@ const useUserData = create((set) => ({
         return false;
       }
     } catch (error) {
+      console.log(error)
       toast.error(error);
-      return false;
+      throw new Error (error);
     } finally {
       set({ isLoading: false });
     }
@@ -45,7 +46,6 @@ const useUserData = create((set) => ({
         `https://max-quiz-app-backend.onrender.com/results_data/${data.userId}`
       );
       // console.log('fetching', response)
-      set({ userAccountData: response.data });
       if (response.data.length > 0) {
         const attemptedArray = [];
         const newData = response.data.map((resp) => {
@@ -60,16 +60,19 @@ const useUserData = create((set) => ({
           };
         });
         set({ quizzesTaken: attemptedArray });
+      set({ userAccountData: newData });
         return newData;
       } else {
+        console.log(response)
         return response.data;
       }
     } catch (error) {
       console.log(error);
+      throw new Error (error)
     }
   },
-  setUserAccountData: (data) => {
-    set({ userAccountData: data });
+  setUserState: (field, value) => {
+    set({ [field]: value });
   },
   logOut: () => {
     set({ loggedIn: false });

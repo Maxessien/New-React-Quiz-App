@@ -5,10 +5,11 @@ import useDarkMode from "../../stores-component/DarkLightThemeStore";
 import { useNavigate } from "react-router-dom";
 import useUserData from "../../stores-component/UsersData";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
 
 function UserSettings() {
   const { isDarkMode, setIsDarkMode, selectedTheme } = useDarkMode();
-  const { userData, logOut, setUserAccountData } = useUserData();
+  const { userData, logOut, setUserState } = useUserData();
   const navigate = useNavigate();
   const handleSelectedTheme = (e) => {
     const theme = e.target.value;
@@ -17,16 +18,20 @@ function UserSettings() {
   };
 
   const handleAccountDataReset = async () => {
-    // const res = await axios.post("http://127.0.0.1:5000/update_account_data", {
-    //   quizzesTaken: [],
-    //   userId: userData.userId,
-    // });
-    const res = await axios.post("https://max-quiz-app-backend.onrender.com/update_account_data", {
-      quizzesTaken: [],
-      userId: userData.userId,
-    });
-    console.log(res);
-    setUserAccountData(res.data)
+    try {
+      // const res = await axios.post("http://127.0.0.1:5000/reset_results_data", {
+      //   user_id: userData.userId,
+      // });
+      const res = await axios.post("https://max-quiz-app-backend.onrender.com/reset_results_data", {
+        userId: userData.userId,
+      });
+      console.log(res);
+      setUserState("userAccountData", {})
+      toast.success("Quiz progress reset successful")
+    } catch (error) {
+      toast.error("There was an error, Please try again later")
+      console.log(error)
+    }
   };
 
   const handleLogout = () => {
@@ -140,6 +145,14 @@ function UserSettings() {
             </div>
           </section>
         </main>
+        <ToastContainer
+          position="top-center"
+          pauseOnHover={true}
+          autoClose={4000}
+          newestOnTop={true}
+          theme="colored"
+
+        />
       </UserAccountLayout>
     </>
   );
