@@ -35,7 +35,7 @@ function Results({ answersData, userAnswers, dataAtIndex }) {
           // const res = await axios.post(
           //     "http://127.0.0.1:5000/update_results_db",
           //     newAccountData
-          //)
+          // )
             const res = await axios.post(
               "https://max-quiz-app-backend.onrender.com/update_results_db",
               newAccountData

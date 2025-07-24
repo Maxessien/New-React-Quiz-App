@@ -36,12 +36,16 @@ function DashBoard() {
               </section>
               <section className="overview-card">
                 <h3>Total Quizzes Taken</h3>
-                <p>{userAccountData.length > 0 ? userAccountData.length : "-"}</p>
+                <p>
+                  {userAccountData.length > 0 ? userAccountData.length : "-"}
+                </p>
               </section>
               <section className="overview-card">
                 <h3>Average Quiz Score</h3>
                 <p>
-                  {userAccountData.length > 0 ? `${averageScore(userAccountData)}%` : "-"}
+                  {userAccountData.length > 0
+                    ? `${averageScore(userAccountData)}%`
+                    : "-"}
                 </p>
               </section>
             </div>

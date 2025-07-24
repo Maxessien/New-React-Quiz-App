@@ -6,7 +6,7 @@ import useUserData from "../../stores-component/UsersData";
 // import { useState } from "react";
 
 function LoginForm() {
-  const { fetchUsersData, isLoading, fetchUserAccountData } =
+  const { fetchUsersData, isLoading, fetchUserAccountData, setUserState } =
     useUserData();
   const navigate = useNavigate();
   const {
@@ -21,20 +21,21 @@ function LoginForm() {
   // };
 
   const submitForm = async (data) => {
+    setUserState("userAccountData", [])
     try {
       const user = await fetchUsersData(data, "login");
-      console.log(user)
       if (user) {
-        console.log(user, 'user')
-        localStorage.setItem("session", JSON.stringify(user.sessionToken))
-        const res = await fetchUserAccountData(user);
-        console.log(res, "res")
-        if (res){
-          toast.success("Login Successful");
-          setTimeout(()=>{
-            navigate(`/${user.userId.trim().toLowerCase()}/dashboard`);
-          }, 3000)
-        }
+        sessionStorage.setItem("session", JSON.stringify(user.sessionToken))
+        toast.success("Login Successful");
+        setTimeout(()=>{
+          navigate(`/${user.userId.trim().toLowerCase()}/dashboard`);
+        }, 1500)
+        setTimeout( async ()=>{
+          const res = await fetchUserAccountData(user);
+          console.log(res, "res")
+        }, 5000)
+        // if (res){
+        // }
       } else {
         console.log(user, 'fff');
         toast.error("Invalid Email or Password");

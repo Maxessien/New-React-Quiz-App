@@ -1,15 +1,13 @@
 import { FaFilter, FaSearch } from "react-icons/fa";
 import UserAccountLayout from "../../layout-components/UserAccountLayout";
-import { useState, useReducer, useEffect } from "react";
+import { useState, useReducer, useEffect, useRef } from "react";
 import "./scss/user-quiz-tab.scss";
 import useQuizData from "../../stores-component/QuizDataStore";
 import { Link } from "react-router-dom";
-import AvailableQuizList from "../../layout-components/AvailableQuizList";
 // eslint-disable-next-line no-unused-vars
 import { AnimatePresence, motion } from "framer-motion";
 import useIsDarkMode from "../../stores-component/DarkLightThemeStore";
 import useUserData from "../../stores-component/UsersData";
-// import { useQuery } from "@tanstack/react-query";
 
 function UserQuizTab() {
   const { allData } = useQuizData();
@@ -18,12 +16,16 @@ function UserQuizTab() {
   const { quizzesTaken } = useUserData();
   const [attemptFilter, setAttemptFilter] = useState([]);
   const [attemptFilterType, setAttemptFilterType] = useState();
-  const courses = allData.map(({ course_code }) => {
-    return course_code;
-  });
+  const courseRef = useRef([])
+  allData.forEach(({course_code})=>{
+    if (!courseRef.current.includes(course_code)){
+      courseRef.current.push(course_code)
+    }
+  })
+  const courses = courseRef.current
+  console.log(courses)
 
   //setting the theme of this component dynamically
-  console.log;
   const handleSelectedCourse = (state, action) => {
     if (action.type === "all") {
       return [...courses];
@@ -125,20 +127,20 @@ function UserQuizTab() {
                   <div className="category">
                     <h3>By course</h3>
                     <ul className="all-courses">
-                      {allData.map(({ course_code }, index) => {
+                      {courses.map((course, index) => {
                         return (
                           <li
                             style={{
-                              background: selectedCategory.includes(course_code)
+                              background: selectedCategory.includes(course)
                                 ? isDarkMode
                                   ? "var(--blue-border)"
                                   : "rgba(106, 150, 156, 1)"
                                 : "none",
                             }}
                             key={index}
-                            onClick={() => dispatch({ type: course_code })}
+                            onClick={() => dispatch({ type: course })}
                           >
-                            {course_code}
+                            {course}
                           </li>
                         );
                       })}

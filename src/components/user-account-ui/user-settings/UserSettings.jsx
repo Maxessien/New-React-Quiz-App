@@ -26,17 +26,19 @@ function UserSettings() {
         userId: userData.userId,
       });
       console.log(res);
-      setUserState("userAccountData", {})
-      toast.success("Quiz progress reset successful")
+      setUserState("userAccountData", {});
+      setUserState("quizzesTaken", []);
+      toast.success("Quiz progress reset successful");
     } catch (error) {
-      toast.error("There was an error, Please try again later")
-      console.log(error)
+      toast.error("There was an error, Please try again later");
+      console.log(error);
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    const session = JSON.parse(sessionStorage.getItem("session"));
+    await logOut(session);
     navigate("/login");
-    logOut();
     setIsDarkMode("system");
   };
 
@@ -151,7 +153,6 @@ function UserSettings() {
           autoClose={4000}
           newestOnTop={true}
           theme="colored"
-
         />
       </UserAccountLayout>
     </>

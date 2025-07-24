@@ -4,8 +4,8 @@
 .account-layout {
   background: var(--body-bg);
   width: 100vw;
-  height: 100vh;
-  min-height: max-content;
+  height: max-content;
+  min-height: 100vh;
   color: var(--text-color);
   @include media(medium, "", min-width) {
     @include grid(20% 80%, auto, 0, "true");

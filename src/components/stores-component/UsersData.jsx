@@ -30,15 +30,16 @@ const useUserData = create((set) => ({
         return false;
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast.error(error);
-      throw new Error (error);
+      throw new Error(error);
     } finally {
       set({ isLoading: false });
     }
   },
   fetchUserAccountData: async (data) => {
     try {
+      set({ isLoading: true });
       // const response = await axios.get(
       //   `http://127.0.0.1:5000/results_data/${data.userId}`
       // );
@@ -60,22 +61,33 @@ const useUserData = create((set) => ({
           };
         });
         set({ quizzesTaken: attemptedArray });
-      set({ userAccountData: newData });
+        set({ userAccountData: newData });
         return newData;
       } else {
-        console.log(response)
+        console.log(response);
         return response.data;
       }
     } catch (error) {
       console.log(error);
-      throw new Error (error)
+      throw new Error(error);
+    } finally {
+      set({ isLoading: false });
     }
   },
   setUserState: (field, value) => {
     set({ [field]: value });
   },
-  logOut: () => {
+  logOut: async (token) => {
+    // const res = await axios.post(
+    //   "http://127.0.0.1:5000//delete_with_token/<string:token>",
+    //   token
+    // );
+    const res = await axios.post(
+      "https://max-quiz-app-backend.onrender.com/delete_with_token/<string:token>",
+      token
+    );
     set({ loggedIn: false });
+    console.log(res);
     set({ userData: {} });
     set({ quizzesTaken: [] });
   },

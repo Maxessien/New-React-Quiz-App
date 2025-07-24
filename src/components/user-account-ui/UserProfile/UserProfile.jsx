@@ -23,21 +23,24 @@ function UserProfile() {
   const handleSave = async (data) => {
     try {
       // await axios.post("http://127.0.0.1:5000/update", {...data, userId: userData.userId})
-      await axios.post("https://max-quiz-app-backend.onrender.com/update", {...data, userId: userData.userId})
-      setUserState("userData", {...data, userId: userData.userId})
+      await axios.post("https://max-quiz-app-backend.onrender.com/update", {
+        ...data,
+        userId: userData.userId,
+      });
+      setUserState("userData", { ...data, userId: userData.userId });
       setEditForm(true);
       setShowPassword(false);
-      toast.success("Account successfully updated")
+      toast.success("Account successfully updated");
     } catch (error) {
-      toast.error("There was an error, please try again later")
-      console.log(error)
+      toast.error("There was an error, please try again later");
+      console.log(error);
     }
   };
 
   const handleCancel = () => {
     setShowPassword(false);
     setEditForm(true);
-    reset(userData)
+    reset(userData);
   };
   return (
     <>
@@ -155,11 +158,11 @@ function UserProfile() {
           </form>
         </section>
         <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        newestOnTop={true}
-        pauseOnHover={true}
-        theme="colored"
+          position="top-center"
+          autoClose={5000}
+          newestOnTop={true}
+          pauseOnHover={true}
+          theme="colored"
         />
       </UserAccountLayout>
     </>
