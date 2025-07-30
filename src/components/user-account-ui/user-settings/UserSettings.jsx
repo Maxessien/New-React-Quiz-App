@@ -23,7 +23,7 @@ function UserSettings() {
       //   user_id: userData.userId,
       // });
       const res = await axios.post("https://max-quiz-app-backend.onrender.com/reset_results_data", {
-        userId: userData.userId,
+        user_id: userData.userId,
       });
       console.log(res);
       setUserState("userAccountData", {});
