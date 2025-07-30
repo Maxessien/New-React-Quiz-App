@@ -15,34 +15,20 @@ function LoginForm() {
     formState: { errors, isSubmitting },
   } = useForm({ mode: "onTouched" });
 
-  // const admin = {
-  //   adminEmail: "admin@gmail.com",
-  //   adminPassword: "maxadmin12354",
-  // };
-
   const submitForm = async (data) => {
-    setUserState("userAccountData", [])
+    setUserState("userAccountData", []);
     try {
       const user = await fetchUsersData(data, "login");
       if (user) {
-        sessionStorage.setItem("session", JSON.stringify(user.sessionToken))
-        toast.success("Login Successful");
-        setTimeout(()=>{
-          navigate(`/${user.userId.trim().toLowerCase()}/dashboard`);
-        }, 1500)
-        setTimeout( async ()=>{
-          const res = await fetchUserAccountData(user);
-          console.log(res, "res")
-        }, 5000)
-        // if (res){
-        // }
+        sessionStorage.setItem("session", JSON.stringify(user.sessionToken));
+        navigate(`/${user.userId.trim().toLowerCase()}/dashboard`);
+        await fetchUserAccountData(user);
       } else {
-        console.log(user, 'fff');
         toast.error("Invalid Email or Password");
       }
     } catch (error) {
-      console.log(error)
-      toast.error("There was an error, please try again later")
+      console.log(error);
+      toast.error("There was an error, please try again later");
     }
   };
   return (

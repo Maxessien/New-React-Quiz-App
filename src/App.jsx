@@ -36,7 +36,6 @@ function PublicRoute() {
   }
 }
 
-
 function App() {
   const { fetchData, allData } = useQuizData();
   const { mobileView, setMobileView } = useMobileView();
@@ -53,6 +52,9 @@ function App() {
     const session = JSON.parse(sessionStorage.getItem("session"));
     console.log(session);
     const loginSessionedUser = async (token) => {
+      //Takes one argument i.e the session token if it exists
+      // Checks if a session token exists in the users browsers local storage and if yes checks validity and 
+      // if valid logs user in automatically els redirects to login page
       if (token) {
         try {
           // const response = await axios.get(

@@ -3,13 +3,14 @@ import UserAccountLayout from "../../layout-components/UserAccountLayout.jsx";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import useUserData from "../../stores-component/UsersData.jsx";
 import { useRef } from "react";
-import useQuizData from "../../stores-component/QuizDataStore.jsx";
+// import useQuizData from "../../stores-component/QuizDataStore.jsx";
 
 function DashBoard() {
   const { userAccountData, userData, quizzesTaken } = useUserData();
-  const { allData } = useQuizData();
+  // const { allData } = useQuizData();
   const total = useRef(0);
   total.current = 0;
+  console.log(quizzesTaken, "twtw")
   function averageScore(array) {
     const length = array.length;
     array.forEach((item) => {
@@ -51,17 +52,17 @@ function DashBoard() {
             </div>
 
             <section className="progress">
-              <h3>Quizzes Completed</h3>
+              <h3>Weekly Quizzes Completed</h3>
               <p>
                 {quizzesTaken.length > 0
-                  ? `${quizzesTaken.length}/${allData.length}`
-                  : `0/${allData.length}`}
+                  ? quizzesTaken.length < 7 ? `${quizzesTaken.length}/7` : "7/7"
+                  : `0/7`}
               </p>
               <div className="progress-bar-wrapper">
                 <div className="progress-bar">
                   <CircularProgressbar
-                    value={quizzesTaken.length > 0 ? quizzesTaken.length : 0}
-                    maxValue={allData.length}
+                    value={quizzesTaken.length > 0 ? quizzesTaken.length < 7 ? quizzesTaken.length : 7 : 0}
+                    maxValue={7}
                     text={""}
                     circleRatio={1}
                     strokeWidth={20}
@@ -77,9 +78,7 @@ function DashBoard() {
                   />
                   <span>
                     {userAccountData[0]
-                      ? `${parseInt(
-                          (userAccountData.length / allData.length) * 100
-                        )}%`
+                      ? `${quizzesTaken.length > 0 ? quizzesTaken.length < 7 ? parseInt((quizzesTaken.length/7)*100) : 100 : 0}%`
                       : "0%"}
                   </span>
                 </div>

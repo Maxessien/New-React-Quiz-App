@@ -16,9 +16,7 @@
     @include flex(center, center, rem(20), column);
     li {
       font-size: rem(20);
-      @include media(light, 'true', prefers-color-scheme){
-        color: var(--body-bg)
-      }
+        color: var(--text-color)
     }
   }
 }
